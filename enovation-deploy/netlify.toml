@@ -1,8 +1,11 @@
 [build]
-  publish = "."
-  functions = "netlify/functions"
+     publish = "."
+     functions = "netlify/functions"
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
+   [[plugins]]
+     package = "@netlify/plugin-functions-install-core"
+
+   [[headers]]
+     for = "/*"
+     [headers.values]
+       X-Frame-Options = "SAMEORIGIN"
