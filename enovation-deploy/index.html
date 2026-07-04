@@ -408,7 +408,7 @@ footer{background:#060606;padding:36px 60px;display:flex;align-items:center;just
             <div class="ld-step" id="lds-4" style="display:none">
               <span class="tp-label">Step 4 of 5</span>
               <p class="tp-q">Where is the project located?</p>
-              <input class="t-inp" id="ld-loc" placeholder="City / County in Florida…">
+              <input class="t-inp" id="ld-loc" placeholder="City / County in Florida...">
               <div style="display:flex;gap:10px;justify-content:flex-end"><button class="t-btn" style="width:auto;padding:12px 24px;background:transparent;color:var(--gold);border:1px solid rgba(184,154,90,0.3)" onclick="ldNext(3)">← Back</button><button class="t-btn" style="width:auto;padding:12px 24px" onclick="ldNext(5)">Continue →</button></div>
             </div>
             <div class="ld-step" id="lds-5" style="display:none">
@@ -417,7 +417,7 @@ footer{background:#060606;padding:36px 60px;display:flex;align-items:center;just
               <input class="t-inp" id="ld-name" placeholder="Full name">
               <input class="t-inp" id="ld-email" placeholder="Email address">
               <input class="t-inp" id="ld-phone" placeholder="Phone (optional)">
-              <textarea class="t-ta" id="ld-notes" placeholder="Describe your project briefly…"></textarea>
+              <textarea class="t-ta" id="ld-notes" placeholder="Describe your project briefly..."></textarea>
               <div style="display:flex;gap:10px;justify-content:flex-end"><button class="t-btn" style="width:auto;padding:12px 24px;background:transparent;color:var(--gold);border:1px solid rgba(184,154,90,0.3)" onclick="ldNext(4)">← Back</button><button class="t-btn" style="width:auto;padding:12px 24px" id="ld-submit" onclick="ldSubmit()">Get Assessment →</button></div>
             </div>
           </div>
@@ -466,7 +466,7 @@ footer{background:#060606;padding:36px 60px;display:flex;align-items:center;just
           <button class="t-opt" onclick="socTone(this,'Behind-the-scenes & authentic')">Behind the Scenes</button>
         </div>
         <span class="tp-label">Extra details (optional)</span>
-        <textarea class="t-ta" id="soc-notes" placeholder="E.g. 'Miami Beach kitchen, marble countertops, before/after reveal'…"></textarea>
+        <textarea class="t-ta" id="soc-notes" placeholder="E.g. 'Miami Beach kitchen, marble countertops, before/after reveal'..."></textarea>
         <button class="t-btn" id="soc-btn" onclick="socGen()">Generate Posts</button>
         <div class="t-result" id="soc-result">
           <div class="post-out" id="soc-posts"></div>
@@ -585,7 +585,7 @@ footer{background:#060606;padding:36px 60px;display:flex;align-items:center;just
         <span class="tp-label">Step 1 — Upload a photo</span>
         <label class="ai-upload" id="ai-upload-box">
           <input type="file" id="ai-file" accept="image/*" onchange="aiFileChosen(this)">
-          <span class="ai-upload-txt" id="ai-upload-txt">Tap to upload a photo of the space (kitchen, bathroom, yard, exterior…)</span>
+          <span class="ai-upload-txt" id="ai-upload-txt">Tap to upload a photo of the space (kitchen, bathroom, yard, exterior...)</span>
         </label>
 
         <span class="tp-label">Step 2 — Describe what you want</span>
@@ -825,7 +825,7 @@ function ldSubmit(){
   ldData.email=document.getElementById('ld-email').value;
   ldData.notes=document.getElementById('ld-notes').value;
   var btn=document.getElementById('ld-submit');
-  btn.textContent='Analyzing…';btn.disabled=true;
+  btn.textContent='Analyzing...';btn.disabled=true;
   var prompt='You are the AI assistant for Enovation LLC, a full-service construction and engineering company serving all 67 Florida counties. Lead form data: Service: '+ldData.service+', Budget: '+ldData.budget+', Timeline: '+ldData.timeline+', Location: '+ldData.location+', Name: '+ldData.name+', Notes: '+(ldData.notes||'None')+'. Score A/B/C, write a personalized reply, and give 2-3 internal team notes. JSON only: {"score":"A","headline":"...","reply":"...","notes":["...","..."]}';
   apiCall(prompt,function(err,txt){
     if(err||!txt){btn.textContent='Error – try again';btn.disabled=false;return;}
@@ -864,7 +864,7 @@ var socToneVal='Professional & trustworthy';
 function socChip(el,val){document.querySelectorAll('#soc-chips .t-chip').forEach(function(c){c.classList.remove('tc-on');});el.classList.add('tc-on');socService=val;}
 function socTone(el,val){document.querySelectorAll('#soc-tones .t-opt').forEach(function(o){o.classList.remove('t-sel');});el.classList.add('t-sel');socToneVal=val;}
 function socGen(){
-  var btn=document.getElementById('soc-btn');btn.textContent='Generating…';btn.disabled=true;
+  var btn=document.getElementById('soc-btn');btn.textContent='Generating...';btn.disabled=true;
   var notes=document.getElementById('soc-notes').value;
   var prompt='You are a social media expert for Enovation LLC (luxury construction, all of Florida, Instagram/TikTok: @enovationllc, enovationllc.com). Generate 4 posts. Service: '+socService+'. Tone: '+socToneVal+'. Details: '+(notes||'none')+'. 2 Instagram (3-5 lines + CTA) + 2 TikTok (1-2 lines + energy). Include 8-10 hashtags each. JSON only: {"posts":[{"platform":"Instagram","type":"...","caption":"...","hashtags":"..."}]}';
   apiCall(prompt,function(err,txt){
@@ -889,7 +889,7 @@ function socGen(){
 var seoTypeVal='Blog post';
 function seoType(el,val){document.querySelectorAll('#seo-types .t-opt').forEach(function(o){o.classList.remove('t-sel');});el.classList.add('t-sel');seoTypeVal=val;}
 function seoGen(){
-  var btn=document.getElementById('seo-btn');btn.textContent='Generating…';btn.disabled=true;
+  var btn=document.getElementById('seo-btn');btn.textContent='Generating...';btn.disabled=true;
   var county=document.getElementById('seo-county').value;
   var service=document.getElementById('seo-service').value;
   var prompt='SEO expert for Enovation LLC (enovationllc.com, 305-440-7464, all of Florida). Generate "'+seoTypeVal+'" content for: County: '+county+', Service: '+service+'. Goal: rank on Google, drive traffic to enovationllc.com. JSON only: {"title":"...","sections":[{"heading":"...","content":"..."}],"keywords":["...","..."]}';
@@ -918,7 +918,7 @@ var outTypeVal='email';var outSeqVal=1;
 function outType(el,val){document.querySelectorAll('#out-types .t-opt').forEach(function(o){o.classList.remove('t-sel');});el.classList.add('t-sel');outTypeVal=val;}
 function outSeq(el,val){document.querySelectorAll('#out-seq .t-opt').forEach(function(o){o.classList.remove('t-sel');});el.classList.add('t-sel');outSeqVal=val;}
 function outGen(){
-  var btn=document.getElementById('out-btn');btn.textContent='Generating…';btn.disabled=true;
+  var btn=document.getElementById('out-btn');btn.textContent='Generating...';btn.disabled=true;
   var scenario=document.getElementById('out-scenario').value;
   var name=document.getElementById('out-name').value||'there';
   var service=document.getElementById('out-service').value;
@@ -966,7 +966,7 @@ function aiCraftPrompt(){
   var desc=document.getElementById('ai-desc').value.trim();
   if(!desc){alert('Describe the change you want first.');return;}
   var btn=document.getElementById('ai-prompt-btn');
-  btn.innerHTML='<span class="ai-spinner"></span>Crafting…';btn.disabled=true;
+  btn.innerHTML='<span class="ai-spinner"></span>Crafting...';btn.disabled=true;
   var prompt='You are an expert design prompt writer for an AI image editing model. A contractor\'s client wants to preview a renovation. Client\'s plain-language request: "'+desc+'". Write ONE detailed, vivid image-editing prompt (2-4 sentences) describing the desired "after" version of the uploaded photo — specific materials, colors, finishes, and lighting — while preserving the room\'s layout, camera angle, and perspective. JSON only: {"prompt":"..."}';
   apiCall(prompt,function(err,txt){
     btn.innerHTML='✦ Craft AI Prompt';btn.disabled=false;
@@ -985,7 +985,7 @@ function aiGenerateImage(){
   var prompt=document.getElementById('ai-final-prompt').value.trim()||document.getElementById('ai-desc').value.trim();
   if(!prompt){alert('Describe the change you want first.');return;}
   var btn=document.getElementById('ai-gen-btn');
-  btn.innerHTML='<span class="ai-spinner"></span>Generating… (~20s)';btn.disabled=true;
+  btn.innerHTML='<span class="ai-spinner"></span>Generating... (~20s)';btn.disabled=true;
   fetch('/.netlify/functions/generate-image',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
@@ -1013,7 +1013,7 @@ function aiReset(){
   aiImgData=null;aiImgDataUrl=null;
   var box=document.getElementById('ai-upload-box');
   box.classList.remove('has-img');
-  box.innerHTML='<input type="file" id="ai-file" accept="image/*" onchange="aiFileChosen(this)"><span class="ai-upload-txt" id="ai-upload-txt">Tap to upload a photo of the space (kitchen, bathroom, yard, exterior…)</span>';
+  box.innerHTML='<input type="file" id="ai-file" accept="image/*" onchange="aiFileChosen(this)"><span class="ai-upload-txt" id="ai-upload-txt">Tap to upload a photo of the space (kitchen, bathroom, yard, exterior...)</span>';
   document.getElementById('ai-desc').value='';
   document.getElementById('ai-final-prompt').value='';
   document.getElementById('ai-prompt-box').classList.remove('show');
