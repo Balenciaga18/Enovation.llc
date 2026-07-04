@@ -55,10 +55,19 @@ exports.handler = async (event) => {
       body: JSON.stringify(response),
     };
   } catch (err) {
+    // TEMPORARY DEBUG: return the real error as if it were Eva's reply,
+    // so it shows up directly in the chat widget instead of a generic message.
     return {
-      statusCode: 500,
+      statusCode: 200,
       headers,
-      body: JSON.stringify({ error: err.message }),
+      body: JSON.stringify({
+        content: [
+          {
+            type: "text",
+            text: "DEBUG ERROR: " + (err && err.message ? err.message : String(err)),
+          },
+        ],
+      }),
     };
   }
 };
