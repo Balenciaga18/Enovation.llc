@@ -1,3 +1,4 @@
+
 const Anthropic = require("@anthropic-ai/sdk");
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -55,19 +56,10 @@ exports.handler = async (event) => {
       body: JSON.stringify(response),
     };
   } catch (err) {
-    // TEMPORARY DEBUG: return the real error as if it were Eva's reply,
-    // so it shows up directly in the chat widget instead of a generic message.
     return {
-      statusCode: 200,
+      statusCode: 500,
       headers,
-      body: JSON.stringify({
-        content: [
-          {
-            type: "text",
-            text: "DEBUG ERROR: " + (err && err.message ? err.message : String(err)),
-          },
-        ],
-      }),
+      body: JSON.stringify({ error: err.message }),
     };
   }
 };
