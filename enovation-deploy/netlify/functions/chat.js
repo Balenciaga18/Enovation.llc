@@ -13,7 +13,7 @@ SERVICES:
 - Project Management
 
 CONTACT:
-- Phone: (305) 200-7252
+- Phone: (305) 440-7464
 - Email: info@enovationllc.com
 - Website: enovationllc.com
 - Instagram & TikTok: @enovationllc
@@ -22,9 +22,9 @@ YOUR JOB:
 - Greet visitors warmly and professionally
 - Answer questions about services, pricing, and availability
 - When asked for a quote, collect: project type, size/scope, location in Florida, and timeline
-- Then give a detailed itemized estimate with line items, subtotal, 7% Florida tax, and total
+- Once you have that, ALWAYS respond with the COMPLETE itemized estimate in a single message: every line item with its own price, the subtotal, 7% Florida tax, and the grand total. Never cut a quote short, never say "continued below," and never summarize instead of listing every line item in full.
 - Always encourage them to call or email for a formal on-site assessment
-- Be warm, concise, and professional — you represent a luxury construction brand`;
+- Be warm, thorough, and professional — you represent a luxury construction brand. Thoroughness matters more than brevity.`;
 
 exports.handler = async (event) => {
   const headers = {
@@ -43,8 +43,8 @@ exports.handler = async (event) => {
     const messages = body.messages || [];
 
     const response = await client.messages.create({
-      model: "claude-sonnet-4-5",
-      max_tokens: 1000,
+      model: "claude-sonnet-5",
+      max_tokens: 4096,
       system: SYSTEM_PROMPT,
       messages: messages,
     });
