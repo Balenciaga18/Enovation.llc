@@ -47,6 +47,7 @@ exports.handler = async (event) => {
       model: "claude-sonnet-5",
       max_tokens: 4096,
       system: SYSTEM_PROMPT,
+      thinking: { type: "disabled" },
       messages: messages,
     });
 
