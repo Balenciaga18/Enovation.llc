@@ -1210,30 +1210,48 @@ async function enovSend(preset) {
   ENOV_HIST.push({role: 'user', content: text});
 
   var typing = enovAddMsg('bot', '<div class="enov-typing"><span></span><span></span><span></span></div>');
+  var bubble = null;
+  var fullText = '';
+  var gotFirstChunk = false;
 
   try {
     var res = await fetch('/.netlify/functions/chat', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        model: 'claude-sonnet-5',
-        max_tokens: 4096,
-        system: ENOV_SYS,
-        messages: ENOV_HIST
-      })
+      body: JSON.stringify({ messages: ENOV_HIST })
     });
-    var data = await res.json();
-    var reply = null;
-    if (data && Array.isArray(data.content) && data.content.length) {
-      reply = data.content.filter(function(b){ return b && b.type === 'text' && b.text; }).map(function(b){ return b.text; }).join('\n');
+
+    if (!res.ok || !res.body) {
+      throw new Error('Server responded with status ' + res.status);
     }
-    if (!reply) {
-      var errMsg = (data && data.error && (data.error.message || data.error)) ? (data.error.message || data.error) : null;
-      reply = errMsg ? ('Sorry, something went wrong: ' + errMsg + '. Please call (305) 440-7464.') : 'Sorry, I had trouble. Please call (305) 440-7464.';
+
+    var reader = res.body.getReader();
+    var decoder = new TextDecoder();
+
+    while (true) {
+      var chunk = await reader.read();
+      if (chunk.done) break;
+      var piece = decoder.decode(chunk.value, {stream: true});
+      if (!piece) continue;
+
+      if (!gotFirstChunk) {
+        gotFirstChunk = true;
+        typing.remove();
+        bubble = enovAddMsg('bot', '');
+      }
+
+      fullText += piece;
+      var b = bubble.querySelector('.enov-bubble-msg');
+      if (b) b.innerHTML = enovFmt(fullText);
+      enovScroll();
     }
-    ENOV_HIST.push({role: 'assistant', content: reply});
-    typing.remove();
-    enovAddMsg('bot', enovFmt(reply));
+
+    if (!gotFirstChunk) {
+      typing.remove();
+      enovAddMsg('bot', 'Sorry, I had trouble. Please call (305) 440-7464.');
+    } else {
+      ENOV_HIST.push({role: 'assistant', content: fullText});
+    }
   } catch(e) {
     typing.remove();
     var errText = (e && e.message) ? e.message : String(e);
