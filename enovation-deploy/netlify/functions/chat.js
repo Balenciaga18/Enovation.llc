@@ -1,4 +1,4 @@
-const Anthropic = require("@anthropic-ai/sdk");
+import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -27,40 +27,56 @@ YOUR JOB:
 - Be warm and professional — you represent a luxury construction brand.
 - IMPORTANT: For general questions (services, availability, small talk), keep replies SHORT — 2-4 sentences max. Save length and detail only for the actual itemized quote once you have all the project details. Do not pad ordinary answers with extra detail.`;
 
-exports.handler = async (event) => {
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Content-Type": "application/json",
-  };
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
 
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 200, headers, body: "" };
+export default async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("", { status: 200, headers: corsHeaders });
   }
 
+  let messages = [];
   try {
-    const body = JSON.parse(event.body || "{}");
-    const messages = body.messages || [];
-
-    const response = await client.messages.create({
-      model: "claude-sonnet-5",
-      max_tokens: 4096,
-      system: SYSTEM_PROMPT,
-      thinking: { type: "disabled" },
-      messages: messages,
+    const body = await req.json();
+    messages = body.messages || [];
+  } catch (e) {
+    return new Response(JSON.stringify({ error: "Invalid request body" }), {
+      status: 400,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
-
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify(response),
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: err.message }),
-    };
   }
+
+  const encoder = new TextEncoder();
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        const anthropicStream = client.messages.stream({
+          model: "claude-sonnet-5",
+          max_tokens: 4096,
+          system: SYSTEM_PROMPT,
+          thinking: { type: "disabled" },
+          messages,
+        });
+
+        for await (const event of anthropicStream) {
+          if (event.type === "content_block_delta" && event.delta && event.delta.text) {
+            controller.enqueue(encoder.encode(event.delta.text));
+          }
+        }
+      } catch (err) {
+        controller.enqueue(encoder.encode("\n[Sorry, something went wrong: " + err.message + "]"));
+      } finally {
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    status: 200,
+    headers: { ...corsHeaders, "Content-Type": "text/plain; charset=utf-8" },
+  });
 };
