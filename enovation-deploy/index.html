@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enovation LLC — Built in Vision, Driven by Precision</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#B89A5A;--gold-light:#D4B87A;--charcoal:#1A1A1A;--off-white:#F5F2EC;--white:#FFFFFF}
+html{scroll-behavior:smooth}
+#about,#services,#portfolio,#testimonials,#tools,#contact{content-visibility:auto;contain-intrinsic-size:1px 1200px;}
+body{font-family:'Montserrat',sans-serif;background:var(--charcoal);color:var(--off-white);overflow-x:hidden;line-height:1.7}
+#splash{position:fixed;inset:0;z-index:9999;background:#080808;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 1.2s ease;}
+#splash.sp-hide{opacity:0;pointer-events:none;}
+#splash-canvas{display:block;}
+.sp-text{text-align:center;margin-top:28px;opacity:0;transform:translateY(12px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.sp-text.sp-show{opacity:1;transform:translateY(0);}
+.sp-nm{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,52px);font-weight:300;letter-spacing:10px;text-transform:uppercase;color:var(--white);line-height:1;}
+.sp-nm em{font-style:italic;color:var(--gold)}
+.sp-llc{font-size:11px;font-weight:500;letter-spacing:8px;text-transform:uppercase;color:rgba(184,154,90,0.6);margin-top:10px;}
+.sp-tg{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:rgba(245,242,236,0.35);letter-spacing:2px;margin-top:8px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:22px 60px;background:rgba(20,20,20,0.94);border-bottom:1px solid rgba(184,154,90,0.12);opacity:0;animation:fadeUp 0.6s 3.9s ease forwards}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--gold);letter-spacing:3px;text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-links a{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--off-white);text-decoration:none;opacity:0.6;transition:opacity 0.2s,color 0.2s}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.soc-links{display:flex;align-items:center;gap:14px}
+.soc-link{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid rgba(184,154,90,0.25);color:rgba(184,154,90,0.7);text-decoration:none;transition:all 0.3s}
+.soc-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,154,90,0.08)}
+.soc-link svg{width:17px;height:17px;fill:currentColor}
+#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 40px 80px;position:relative;overflow:hidden;opacity:0;animation:fadeUp 0.8s 3.7s ease forwards}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% 42%,rgba(184,154,90,0.07) 0%,transparent 70%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(184,154,90,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(184,154,90,0.035) 1px,transparent 1px);background-size:64px 64px}
+.h-line{width:1px;height:72px;background:rgba(184,154,90,0.45);margin:0 auto 44px}
+.h-eye{font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.h-title{font-family:'Cormorant Garamond',serif;font-size:clamp(54px,8vw,100px);font-weight:300;line-height:1.05;letter-spacing:7px;text-transform:uppercase;color:var(--white);margin-bottom:24px}
+.h-title em{font-style:italic;color:var(--gold)}
+.h-sub{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;font-style:italic;color:rgba(245,242,236,0.55);letter-spacing:2px;margin-bottom:48px}
+.h-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.h-badge{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(184,154,90,0.65);border:1px solid rgba(184,154,90,0.18);padding:7px 16px}
+.h-cta{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(184,154,90,0.45);padding:15px 38px;transition:all 0.3s}
+.h-cta:hover{background:rgba(184,154,90,0.07);letter-spacing:4px}
+.h-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,242,236,0.28);display:flex;flex-direction:column;align-items:center;gap:8px}
+.h-scroll-line{width:1px;height:36px;background:rgba(184,154,90,0.28);animation:scPulse 2s ease-in-out infinite}
+@keyframes scPulse{0%,100%{opacity:.3}50%{opacity:.7}}
+.eyebrow{font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.5vw,50px);font-weight:300;line-height:1.15;letter-spacing:2px;color:var(--white)}
+.sec-title em{font-style:italic;color:var(--gold)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+#about{background:var(--charcoal);padding:100px 60px}
+.about-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-body{font-size:14px;font-weight:300;color:rgba(245,242,236,0.62);margin-top:26px;line-height:1.95}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;border:1px solid rgba(184,154,90,0.18);margin-top:44px}
+.stat{padding:26px 20px;border:1px solid rgba(184,154,90,0.07);text-align:center}
+.sn{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--gold);line-height:1}
+.sl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.38);margin-top:5px}
+.about-box{position:relative;height:450px;border:1px solid rgba(184,154,90,0.18);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.about-glow{position:absolute;inset:0;background:radial-gradient(ellipse 65% 65% at 50% 50%,rgba(184,154,90,0.055) 0%,transparent 70%)}
+.about-mono{font-family:'Cormorant Garamond',serif;font-size:130px;font-weight:300;color:rgba(184,154,90,0.1);user-select:none;line-height:1}
+.c-tl{position:absolute;top:18px;left:18px;width:28px;height:28px;border-top:1px solid rgba(184,154,90,0.38);border-left:1px solid rgba(184,154,90,0.38)}
+.c-br{position:absolute;bottom:18px;right:18px;width:28px;height:28px;border-bottom:1px solid rgba(184,154,90,0.38);border-right:1px solid rgba(184,154,90,0.38)}
+.about-sub{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:0.45;white-space:nowrap}
+#services{background:#111;padding:100px 60px}
+.svc-wrap{max-width:1100px;margin:0 auto}
+.svc-head{margin-bottom:60px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(184,154,90,0.1)}
+.svc{background:#111;padding:44px 32px;border-top:2px solid transparent;transition:border-color 0.3s,background 0.3s}
+.svc:hover{border-top-color:var(--gold);background:rgba(184,154,90,0.025)}
+.svc-n{font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--gold);letter-spacing:2px;opacity:0.55;margin-bottom:20px}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--white);line-height:1.25;margin-bottom:14px}
+.svc-desc{font-size:12px;font-weight:300;color:rgba(245,242,236,0.48);line-height:1.85}
+.svc-arr{display:inline-block;margin-top:24px;font-size:18px;color:var(--gold);opacity:0;transition:opacity 0.3s,transform 0.3s}
+.svc:hover .svc-arr{opacity:1;transform:translateX(4px)}
+#portfolio{background:#0D0D0D;padding:100px 60px}
+.port-wrap{max-width:1200px;margin:0 auto}
+.port-head{margin-bottom:70px}
+.cat{margin-bottom:70px}
+.cat:last-child{margin-bottom:0}
+.cat-hd{display:flex;align-items:center;gap:18px;margin-bottom:22px}
+.cat-n{font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--gold);letter-spacing:3px;opacity:0.48}
+.cat-t{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--white);letter-spacing:1px}
+.cat-t em{font-style:italic;color:var(--gold)}
+.cat-ln{flex:1;height:1px;background:rgba(184,154,90,0.13)}
+.g-duo{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.g-trio{display:grid;grid-template-columns:2fr 1fr;gap:4px}
+.g-side{display:grid;grid-template-rows:1fr 1fr;gap:4px}
+.fr{position:relative;overflow:hidden;cursor:pointer}
+.fr img{width:100%;height:100%;object-fit:cover;transition:transform 0.75s cubic-bezier(0.25,0.46,0.45,0.94);display:block}
+.fr:hover img{transform:scale(1.05)}
+.fr-main{height:500px}.fr-duo{height:400px}.fr-side{height:242px}
+.fr-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.78) 0%,transparent 52%);opacity:0;transition:opacity 0.4s;display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+.fr:hover .fr-ov{opacity:1}
+.fr-tag{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.fr-cap{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:var(--white);letter-spacing:1px}
+.fr-c1{position:absolute;top:10px;left:10px;width:18px;height:18px;border-top:1px solid rgba(184,154,90,0.75);border-left:1px solid rgba(184,154,90,0.75);opacity:0;transition:opacity 0.4s;pointer-events:none}
+.fr-c2{position:absolute;bottom:10px;right:10px;width:18px;height:18px;border-bottom:1px solid rgba(184,154,90,0.75);border-right:1px solid rgba(184,154,90,0.75);opacity:0;transition:opacity 0.4s;pointer-events:none}
+.fr:hover .fr-c1,.fr:hover .fr-c2{opacity:1}
+#testimonials{background:var(--charcoal);padding:100px 60px}
+.test-wrap{max-width:1100px;margin:0 auto}
+.test-head{margin-bottom:60px}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.test-card{padding:36px 28px;border:1px solid rgba(184,154,90,0.13);transition:border-color 0.3s}
+.test-card:hover{border-color:rgba(184,154,90,0.38)}
+.tq{font-family:'Cormorant Garamond',serif;font-size:52px;line-height:0.6;color:var(--gold);opacity:0.28;margin-bottom:14px}
+.tt{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;font-style:italic;color:rgba(245,242,236,0.78);line-height:1.7;margin-bottom:24px}
+.tl{width:28px;height:1px;background:var(--gold);opacity:0.38;margin-bottom:14px}
+.tn{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--off-white)}
+.tr{font-size:10px;letter-spacing:1px;color:rgba(245,242,236,0.32);margin-top:3px}
+#contact{background:#0E0E0E;padding:100px 60px}
+.con-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.con-body{font-size:13px;font-weight:300;color:rgba(245,242,236,0.48);line-height:1.95;margin-top:22px;margin-bottom:36px}
+.cd{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.cd-l{font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);min-width:78px;padding-top:2px}
+.cd-v{font-size:13px;color:rgba(245,242,236,0.58)}
+.cd-v a{color:rgba(245,242,236,0.58);text-decoration:none;transition:color 0.2s}
+.cd-v a:hover{color:var(--gold)}
+.fg{margin-bottom:18px}
+.fg label{display:block;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.38);margin-bottom:7px}
+.fg input,.fg textarea{width:100%;background:rgba(255,255,255,0.025);border:1px solid rgba(184,154,90,0.18);padding:12px 16px;font-family:'Montserrat',sans-serif;font-size:13px;color:var(--off-white);outline:none;transition:border-color 0.25s;resize:none}
+.fg input:focus,.fg textarea:focus{border-color:rgba(184,154,90,0.55)}
+.fg textarea{height:110px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn-s{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--charcoal);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;border:none;padding:16px 36px;cursor:pointer;transition:background 0.3s,letter-spacing 0.3s;margin-top:6px}
+.btn-s:hover{background:var(--gold-light);letter-spacing:4px}
+#tools{background:#0a0a0a;padding:100px 60px}
+.tools-head{max-width:1100px;margin:0 auto 60px;text-align:center}
+.tools-tabs{display:flex;justify-content:center;gap:0;border:1px solid rgba(184,154,90,0.22);margin:40px auto 0;max-width:700px}
+.ttab{flex:1;padding:13px 8px;background:transparent;border:none;border-right:1px solid rgba(184,154,90,0.22);font-family:'Montserrat',sans-serif;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.38);cursor:pointer;transition:all 0.25s}
+.ttab:last-child{border-right:none}
+.ttab.ta{background:rgba(184,154,90,0.08);color:var(--gold)}
+.ttab:hover:not(.ta){color:rgba(184,154,90,0.7)}
+.tool-panel{display:none;max-width:1100px;margin:48px auto 0;animation:fadeUp 0.4s ease}
+.tool-panel.tp-active{display:block}
+.tp-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.tp-card{background:rgba(255,255,255,0.025);border:1px solid rgba(184,154,90,0.15);padding:28px}
+.tp-label{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+.tp-q{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--off-white);margin-bottom:20px;line-height:1.3}
+.t-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.t-opt{padding:10px 12px;border:1px solid rgba(184,154,90,0.18);background:transparent;color:rgba(245,242,236,0.5);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:500;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-align:left}
+.t-opt:hover{border-color:rgba(184,154,90,0.5);color:var(--off-white)}
+.t-opt.t-sel{border-color:var(--gold);background:rgba(184,154,90,0.08);color:var(--gold)}
+.t-inp{width:100%;background:rgba(255,255,255,0.025);border:1px solid rgba(184,154,90,0.18);padding:11px 14px;font-family:'Montserrat',sans-serif;font-size:12px;color:var(--off-white);outline:none;margin-bottom:14px;transition:border-color 0.2s}
+.t-inp:focus{border-color:rgba(184,154,90,0.5)}
+.t-ta{width:100%;background:rgba(255,255,255,0.025);border:1px solid rgba(184,154,90,0.18);padding:11px 14px;font-family:'Montserrat',sans-serif;font-size:12px;color:var(--off-white);outline:none;margin-bottom:14px;resize:vertical;min-height:80px;transition:border-color 0.2s}
+.t-ta:focus{border-color:rgba(184,154,90,0.5)}
+.t-sel-drop{width:100%;background:#111;border:1px solid rgba(184,154,90,0.18);padding:11px 14px;font-family:'Montserrat',sans-serif;font-size:11px;color:var(--off-white);outline:none;margin-bottom:14px;cursor:pointer;appearance:none}
+.t-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--charcoal);font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;border:none;padding:14px 30px;cursor:pointer;transition:all 0.3s;width:100%;justify-content:center;margin-top:4px}
+.t-btn:hover{background:var(--gold-light)}
+.t-btn:disabled{background:rgba(184,154,90,0.3);cursor:wait}
+.t-result{border-top:1px solid rgba(184,154,90,0.15);margin-top:24px;padding-top:24px;display:none}
+.t-result.show{display:block;animation:fadeUp 0.35s ease}
+.t-r-label{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+.t-r-body{font-size:13px;font-weight:300;color:rgba(245,242,236,0.7);line-height:1.85;white-space:pre-wrap}
+.t-copy{background:transparent;border:1px solid rgba(184,154,90,0.25);color:rgba(184,154,90,0.6);font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:7px 16px;cursor:pointer;margin-top:12px;transition:all 0.2s}
+.t-copy:hover{border-color:var(--gold);color:var(--gold)}
+.t-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.t-chip{padding:6px 12px;border:1px solid rgba(184,154,90,0.18);background:transparent;color:rgba(245,242,236,0.45);font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
+.t-chip:hover{border-color:rgba(184,154,90,0.5);color:var(--off-white)}
+.t-chip.tc-on{border-color:var(--gold);background:rgba(184,154,90,0.08);color:var(--gold)}
+.t-step-dots{display:flex;gap:6px;margin-bottom:18px}
+.t-dot{width:6px;height:6px;border-radius:50%;background:rgba(184,154,90,0.2);transition:all 0.3s}
+.t-dot.td-on{background:var(--gold)}
+.t-dot.td-done{background:rgba(184,154,90,0.5)}
+.t-score{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.t-score-badge{width:44px;height:44px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--gold);flex-shrink:0}
+.t-score-hl{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--off-white)}
+.post-out{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.post-card-o{border:1px solid rgba(184,154,90,0.15);background:rgba(255,255,255,0.02)}
+.post-card-oh{padding:10px 14px;border-bottom:1px solid rgba(184,154,90,0.1);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.post-card-ob{padding:14px;font-size:12px;color:rgba(245,242,236,0.65);line-height:1.7;white-space:pre-wrap}
+.post-card-ot{padding:10px 14px;border-top:1px solid rgba(184,154,90,0.1);font-size:11px;color:rgba(184,154,90,0.55)}
+.seo-out .t-r-label{margin-top:16px}
+.kw-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.kw-pill{padding:4px 10px;border:1px solid rgba(184,154,90,0.22);font-size:10px;color:rgba(184,154,90,0.7)}
+.msg-seq{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.msg-card{border:1px solid rgba(184,154,90,0.15);background:rgba(255,255,255,0.02)}
+.msg-card-h{padding:10px 14px;border-bottom:1px solid rgba(184,154,90,0.1);display:flex;justify-content:space-between;align-items:center}
+.msg-card-hl{font-size:10px;font-weight:500;letter-spacing:1.5px;color:var(--off-white)}
+.msg-card-t{font-size:9px;color:rgba(184,154,90,0.55);letter-spacing:1px}
+.msg-subj{font-size:10px;color:var(--gold);padding:10px 14px 0;letter-spacing:0.5px}
+.msg-card-b{padding:10px 14px 14px;font-size:12px;color:rgba(245,242,236,0.65);line-height:1.75;white-space:pre-wrap}
+.ai-upload{border:1.5px dashed rgba(184,154,90,0.3);background:rgba(255,255,255,0.02);padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:16px;position:relative;overflow:hidden}
+.ai-upload:hover{border-color:var(--gold)}
+.ai-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.ai-upload-txt{font-size:11px;letter-spacing:1px;color:rgba(245,242,236,0.45)}
+.ai-upload.has-img{padding:0;border-style:solid}
+.ai-upload.has-img img{width:100%;max-height:220px;object-fit:cover;display:block}
+.ai-prompt-box{background:rgba(255,255,255,0.02);border:1px solid rgba(184,154,90,0.15);padding:14px;margin-bottom:14px;display:none}
+.ai-prompt-box.show{display:block;animation:fadeUp 0.3s ease}
+.ai-ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.ai-ba-item{border:1px solid rgba(184,154,90,0.15)}
+.ai-ba-lbl{padding:8px 12px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(184,154,90,0.1)}
+.ai-ba-item img{width:100%;height:220px;object-fit:cover;display:block;background:#111}
+.ai-spinner{display:inline-block;width:12px;height:12px;border:1.5px solid rgba(26,26,26,0.3);border-top-color:#1a1a1a;border-radius:50%;animation:aispin 0.7s linear infinite;margin-right:6px}
+@keyframes aispin{to{transform:rotate(360deg)}}
+@media(max-width:960px){#tools{padding:70px 24px}.tp-grid{grid-template-columns:1fr}.post-out{grid-template-columns:1fr}.tools-tabs{flex-wrap:wrap}.ai-ba-grid{grid-template-columns:1fr}}
+footer{background:#060606;padding:36px 60px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(184,154,90,0.09);flex-wrap:wrap;gap:14px}
+.fl{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;color:var(--gold);letter-spacing:3px;text-transform:uppercase}
+.ft{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(184,154,90,0.38)}
+.fc{font-size:10px;color:rgba(245,242,236,0.18);letter-spacing:1px}
+.footer-soc{display:flex;align-items:center;gap:12px}
+.footer-soc a{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid rgba(184,154,90,0.2);color:rgba(184,154,90,0.6);text-decoration:none;transition:all 0.3s}
+.footer-soc a:hover{border-color:var(--gold);color:var(--gold)}
+.footer-soc a svg{width:18px;height:18px;fill:currentColor}
+#lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:997;align-items:center;justify-content:center}
+#lb.on{display:flex}
+#lb img{max-width:92vw;max-height:92vh;object-fit:contain}
+#lb-x{position:absolute;top:22px;right:28px;font-size:26px;color:var(--gold);background:none;border:none;cursor:pointer;opacity:0.65}
+#lb-x:hover{opacity:1}
+@media(max-width:960px){
+  nav{padding:18px 24px}.nav-links{gap:18px}
+  #about,#services,#portfolio,#testimonials,#contact{padding:70px 24px}
+  .about-wrap,.con-wrap{grid-template-columns:1fr;gap:44px}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .test-grid{grid-template-columns:1fr}
+  footer{padding:28px 24px;flex-direction:column;text-align:center}
+  #home{padding:110px 24px 70px}
+  .g-duo,.g-trio{grid-template-columns:1fr}
+  .g-side{grid-template-rows:auto}
+  .fr-main,.fr-duo,.fr-side{height:260px}
+}
+@media(max-width:580px){.svc-grid{grid-template-columns:1fr}.f-row{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<div id="splash">
+  <canvas id="splash-canvas"></canvas>
+  <div class="sp-text" id="sp-text">
+    <div class="sp-nm">Eno<em>vation</em></div>
+    <div class="sp-llc">LLC</div>
+    <div class="sp-tg">Built in vision, driven by precision.</div>
+  </div>
+</div>
+<nav>
+  <div class="nav-logo">Enovation LLC</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="https://enovation-dashboard.netlify.app" target="_blank">Dashboard</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="soc-links">
+    <a class="soc-link" href="https://www.instagram.com/enovationllc" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
+    <a class="soc-link" href="https://www.tiktok.com/@enovationllc" target="_blank" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"></path></svg></a>
+  </div>
+</nav>
+<section id="home">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="h-line"></div>
+  <p class="h-eye">Construction &amp; Engineering — Florida</p>
+  <h1 class="h-title">Eno<em>vation</em><br>LLC</h1>
+  <p class="h-sub">Built in vision, driven by precision.</p>
+  <div class="h-badges"><span class="h-badge">Luxury Residential</span><span class="h-badge">Custom Build-Outs</span><span class="h-badge">Statewide Florida</span></div>
+  <a href="#contact" class="h-cta">Start Your Project &nbsp;→</a>
+  <div class="h-scroll"><div class="h-scroll-line"></div><span>Scroll</span></div>
+</section>
+<section id="about">
+  <div class="about-wrap">
+    <div class="reveal visible">
+      <span class="eyebrow">Who We Are</span>
+      <h2 class="sec-title">Building Florida's<br>Future with <em>Precision</em></h2>
+      <p class="about-body">Enovation LLC is a premier construction and engineering firm with over a decade of proven excellence across the state of Florida. From concept to completion, we bring your most ambitious projects to life with disciplined craftsmanship and engineering integrity.</p>
+      <p class="about-body" style="margin-top:14px">We partner with homeowners, developers, and private clients to deliver exceptional results — on time, on budget, and built to last.</p>
+      <div class="stats">
+        <div class="stat"><div class="sn">10+</div><div class="sl">Years in Business</div></div>
+        <div class="stat"><div class="sn">150+</div><div class="sl">Projects Completed</div></div>
+        <div class="stat"><div class="sn">100%</div><div class="sl">Florida Coverage</div></div>
+        <div class="stat"><div class="sn">50+</div><div class="sl">Trusted Clients</div></div>
+      </div>
+    </div>
+    <div class="about-box reveal visible" style="transition-delay:.2s">
+      <div class="about-glow"></div><div class="c-tl"></div><div class="c-br"></div>
+      <div class="about-mono">E</div>
+      <div class="about-sub">Serving All of Florida</div>
+    </div>
+  </div>
+</section>
+<section id="services">
+  <div class="svc-wrap">
+    <div class="svc-head reveal visible"><span class="eyebrow">What We Build</span><h2 class="sec-title">Our Core <em>Services</em></h2></div>
+    <div class="svc-grid reveal visible" style="transition-delay:.15s">
+      <div class="svc"><div class="svc-n">01</div><div class="svc-name">Luxury Residential</div><p class="svc-desc">Custom luxury homes built from the ground up — pool decks, outdoor living, and exquisitely finished interiors.</p><span class="svc-arr">→</span></div>
+      <div class="svc"><div class="svc-n">02</div><div class="svc-name">Kitchen Remodeling</div><p class="svc-desc">Designer kitchens with custom stone, onyx islands, premium cabinetry, and high-end appliances crafted to perfection.</p><span class="svc-arr">→</span></div>
+      <div class="svc"><div class="svc-n">03</div><div class="svc-name">Bathroom Remodeling</div><p class="svc-desc">Spa-quality bathrooms with marble, custom tile, glass enclosures, freestanding tubs, and luxury fixtures.</p><span class="svc-arr">→</span></div>
+      <div class="svc"><div class="svc-n">04</div><div class="svc-name">General Contracting</div><p class="svc-desc">Full-service contracting for commercial, residential, and mixed-use developments with precision and accountability.</p><span class="svc-arr">→</span></div>
+      <div class="svc"><div class="svc-n">05</div><div class="svc-name">Renovation &amp; Restoration</div><p class="svc-desc">Expert modernization of existing properties approached with care and uncompromising attention to detail.</p><span class="svc-arr">→</span></div>
+      <div class="svc"><div class="svc-n">06</div><div class="svc-name">Project Management</div><p class="svc-desc">End-to-end oversight from pre-construction through final delivery — on time and on budget, every time.</p><span class="svc-arr">→</span></div>
+    </div>
+  </div>
+</section>
+<section id="portfolio">
+  <div class="port-wrap">
+    <div class="port-head reveal visible"><span class="eyebrow">Our Work</span><h2 class="sec-title">Featured <em>Projects</em></h2></div>
+    <div class="cat reveal visible">
+      <div class="cat-hd"><span class="cat-n">01</span><h3 class="cat-t">Luxury <em>Construction</em></h3><div class="cat-ln"></div></div>
+      <div class="g-trio">
+        <div class="fr fr-main" onclick="openLb(this.querySelector(&#39;img&#39;).src)">
+          <img decoding="async" loading="lazy" src="assets/img1.jpg" alt="Luxury home pool"><div class="fr-ov"><span class="fr-tag">Luxury Build</span><span class="fr-cap">Custom Home &amp; Pool</span></div><div class="fr-c1"></div><div class="fr-c2"></div>
+        </div>
+        <div class="g-side">
+          <div class="fr fr-side" onclick="openLb(this.querySelector(&#39;img&#39;).src)">
+            <img decoding="async" loading="lazy" src="assets/img2.jpg" alt="Modern exterior"><div class="fr-ov"><span class="fr-tag">New Construction</span><span class="fr-cap">Modern Home Exterior</span></div><div class="fr-c1"></div><div class="fr-c2"></div>
+          </div>
+          <div class="fr fr-side" onclick="openLb(this.querySelector(&#39;img&#39;).src)">
+            <img decoding="async" loading="lazy" src="assets/img2.jpg" alt="Custom home" style="object-position:bottom"><div class="fr-ov"><span class="fr-tag">New Construction</span><span class="fr-cap">Custom Home Build</span></div><div class="fr-c1"></div><div class="fr-c2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cat reveal visible" style="transition-delay:.1s">
+      <div class="cat-hd"><span class="cat-n">02</span><h3 class="cat-t">Kitchen <em>Remodeling</em></h3><div class="cat-ln"></div></div>
+      <div class="g-duo">
+        <div class="fr fr-duo" onclick="openLb(this.querySelector(&#39;img&#39;).src)">
+          <img decoding="async" loading="lazy" src="assets/img3.jpg" alt="Onyx kitchen"><div class="fr-ov"><span class="fr-tag">Kitchen Remodeling</span><span class="fr-cap">Custom Onyx Kitchen Island</span></div><div class="fr-c1"></div><div class="fr-c2"></div>
+        </div>
+        <div class="fr fr-duo" onclick="openLb(this.querySelector(&#39;img&#39;).src)">
+          <img decoding="async" loading="lazy" src="assets/img4.jpg" alt="Stone kitchen"><div class="fr-ov"><span class="fr-tag">Kitchen Remodeling</span><span class="fr-cap">Full Stone Kitchen Remodel</span></div><div class="fr-c1"></div><div class="fr-c2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="cat reveal visible" style="transition-delay:.2s">
+      <div class="cat-hd"><span class="cat-n">03</span><h3 class="cat-t">Bathroom <em>Remodeling</em></h3><div class="cat-ln"></div></div>
+      <div class="g-trio">
+        <div class="fr fr-main" onclick="openLb(this.querySelector(&#39;img&#39;).src)">
+          <img decoding="async" loading="lazy" src="assets/img5.jpg" alt="Spa bath"><div class="fr-ov"><span class="fr-tag">Bathroom Remodeling</span><span class="fr-cap">Spa Master Bathroom</span></div><div class="fr-c1"></div><div class="fr-c2"></div>
+        </div>
+        <div class="g-side">
+          <div class="fr fr-side" onclick="openLb(this.querySelector(&#39;img&#39;).src)">
+            <img decoding="async" loading="lazy" src="assets/img6.jpg" alt="Glass shower"><div class="fr-ov"><span class="fr-tag">Bathroom Remodeling</span><span class="fr-cap">Glass Shower &amp; Freestanding Tub</span></div><div class="fr-c1"></div><div class="fr-c2"></div>
+          </div>
+          <div class="fr fr-side" onclick="openLb(this.querySelector(&#39;img&#39;).src)">
+            <img decoding="async" loading="lazy" src="assets/img7.jpg" alt="Gold bath"><div class="fr-ov"><span class="fr-tag">Bathroom Remodeling</span><span class="fr-cap">Luxury Bath &amp; Gold Fixtures</span></div><div class="fr-c1"></div><div class="fr-c2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="testimonials">
+  <div class="test-wrap">
+    <div class="test-head reveal visible"><span class="eyebrow">Client Voices</span><h2 class="sec-title">What Our Clients <em>Say</em></h2></div>
+    <div class="test-grid reveal visible" style="transition-delay:.15s">
+      <div class="test-card"><div class="tq">"</div><p class="tt">Enovation delivered our luxury home on time and within budget. Their attention to detail and commitment to quality was evident at every stage.</p><div class="tl"></div><div class="tn">Michael Torres</div><div class="tr">Principal, Torres Development Group — Miami, FL</div></div>
+      <div class="test-card"><div class="tq">"</div><p class="tt">The bathroom and kitchen finishes Enovation delivered are absolutely stunning. Their craftsmanship is in a class of its own.</p><div class="tl"></div><div class="tn">Sandra Ruiz</div><div class="tr">Homeowner — Orlando, FL</div></div>
+      <div class="test-card"><div class="tq">"</div><p class="tt">We have partnered with Enovation on three major projects across South Florida. Their precision and professionalism make them our go-to contractor.</p><div class="tl"></div><div class="tn">David Nguyen</div><div class="tr">CEO, Coastal Property Partners — Fort Lauderdale, FL</div></div>
+    </div>
+  </div>
+</section>
+<section id="tools">
+  <div class="tools-head reveal">
+    <span class="eyebrow">Client Tools</span>
+    <h2 class="sec-title">Grow Your <em>Business</em></h2>
+    <p style="font-size:13px;font-weight:300;color:rgba(245,242,236,0.45);margin-top:18px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.9">Four AI-powered tools to attract leads, generate content, boost your Google presence, and automate outreach — all built for Enovation LLC.</p>
+    <div class="tools-tabs">
+      <button class="ttab ta" onclick="showTool(0)">Lead Qualifier</button>
+      <button class="ttab" onclick="showTool(1)">Social Content</button>
+      <button class="ttab" onclick="showTool(2)">SEO Generator</button>
+      <button class="ttab" onclick="showTool(3)">Outreach</button>
+      <button class="ttab" onclick="showTool(4)">AI Renovation Preview</button>
+    </div>
+  </div>
+
+  <!-- TOOL 1: LEAD QUALIFIER -->
+  <div class="tool-panel tp-active" id="tp0">
+    <div class="tp-grid">
+      <div>
+        <div class="tp-card">
+          <span class="t-step-dots" id="ld-dots"></span>
+          <div id="ld-steps">
+            <div class="ld-step" id="lds-1">
+              <span class="tp-label">Step 1 of 5</span>
+              <p class="tp-q">What type of project do you have in mind?</p>
+              <div class="t-opts">
+                <button class="t-opt" onclick="lOpt(this,'service','Luxury Residential Construction')">🏡 Luxury Residential</button>
+                <button class="t-opt" onclick="lOpt(this,'service','Kitchen or Bathroom Remodeling')">🍳 Kitchen / Bathroom</button>
+                <button class="t-opt" onclick="lOpt(this,'service','Renovation & Restoration')">🔨 Renovation</button>
+                <button class="t-opt" onclick="lOpt(this,'service','Roofing')">🏗️ Roofing</button>
+                <button class="t-opt" onclick="lOpt(this,'service','Concrete & Masonry')">🧱 Concrete & Masonry</button>
+                <button class="t-opt" onclick="lOpt(this,'service','General Contracting')">📋 General Contracting</button>
+              </div>
+              <div style="display:flex;justify-content:flex-end"><button class="t-btn" style="width:auto;padding:12px 24px" onclick="ldNext(2)">Continue →</button></div>
+            </div>
+            <div class="ld-step" id="lds-2" style="display:none">
+              <span class="tp-label">Step 2 of 5</span>
+              <p class="tp-q">What's your approximate budget?</p>
+              <div class="t-opts">
+                <button class="t-opt" onclick="lOpt(this,'budget','Under $25,000')">Under $25K</button>
+                <button class="t-opt" onclick="lOpt(this,'budget','$25,000–$75,000')">$25K – $75K</button>
+                <button class="t-opt" onclick="lOpt(this,'budget','$75,000–$200,000')">$75K – $200K</button>
+                <button class="t-opt" onclick="lOpt(this,'budget','$200,000+')">$200K+</button>
+              </div>
+              <div style="display:flex;gap:10px;justify-content:flex-end"><button class="t-btn" style="width:auto;padding:12px 24px;background:transparent;color:var(--gold);border:1px solid rgba(184,154,90,0.3)" onclick="ldNext(1)">← Back</button><button class="t-btn" style="width:auto;padding:12px 24px" onclick="ldNext(3)">Continue →</button></div>
+            </div>
+            <div class="ld-step" id="lds-3" style="display:none">
+              <span class="tp-label">Step 3 of 5</span>
+              <p class="tp-q">When are you looking to start?</p>
+              <div class="t-opts">
+                <button class="t-opt" onclick="lOpt(this,'timeline','As soon as possible')">As soon as possible</button>
+                <button class="t-opt" onclick="lOpt(this,'timeline','1–3 months')">1 – 3 months</button>
+                <button class="t-opt" onclick="lOpt(this,'timeline','3–6 months')">3 – 6 months</button>
+                <button class="t-opt" onclick="lOpt(this,'timeline','Just planning ahead')">Just planning ahead</button>
+              </div>
+              <div style="display:flex;gap:10px;justify-content:flex-end"><button class="t-btn" style="width:auto;padding:12px 24px;background:transparent;color:var(--gold);border:1px solid rgba(184,154,90,0.3)" onclick="ldNext(2)">← Back</button><button class="t-btn" style="width:auto;padding:12px 24px" onclick="ldNext(4)">Continue →</button></div>
+            </div>
+            <div class="ld-step" id="lds-4" style="display:none">
+              <span class="tp-label">Step 4 of 5</span>
+              <p class="tp-q">Where is the project located?</p>
+              <input class="t-inp" id="ld-loc" placeholder="City / County in Florida...">
+              <div style="display:flex;gap:10px;justify-content:flex-end"><button class="t-btn" style="width:auto;padding:12px 24px;background:transparent;color:var(--gold);border:1px solid rgba(184,154,90,0.3)" onclick="ldNext(3)">← Back</button><button class="t-btn" style="width:auto;padding:12px 24px" onclick="ldNext(5)">Continue →</button></div>
+            </div>
+            <div class="ld-step" id="lds-5" style="display:none">
+              <span class="tp-label">Step 5 of 5</span>
+              <p class="tp-q">How should we reach you?</p>
+              <input class="t-inp" id="ld-name" placeholder="Full name">
+              <input class="t-inp" id="ld-email" placeholder="Email address">
+              <input class="t-inp" id="ld-phone" placeholder="Phone (optional)">
+              <textarea class="t-ta" id="ld-notes" placeholder="Describe your project briefly..."></textarea>
+              <div style="display:flex;gap:10px;justify-content:flex-end"><button class="t-btn" style="width:auto;padding:12px 24px;background:transparent;color:var(--gold);border:1px solid rgba(184,154,90,0.3)" onclick="ldNext(4)">← Back</button><button class="t-btn" style="width:auto;padding:12px 24px" id="ld-submit" onclick="ldSubmit()">Get Assessment →</button></div>
+            </div>
+          </div>
+          <div class="t-result" id="ld-result">
+            <div class="t-score"><div class="t-score-badge" id="ld-badge">—</div><div class="t-score-hl" id="ld-hl"></div></div>
+            <span class="t-r-label">Suggested reply</span>
+            <div class="t-r-body" id="ld-reply"></div>
+            <button class="t-copy" onclick="tCopy(this,document.getElementById('ld-reply').textContent)">Copy Reply</button>
+            <span class="t-r-label" style="margin-top:20px">Internal notes</span>
+            <div class="t-r-body" id="ld-notes-out"></div>
+            <button class="t-copy" style="margin-top:12px" onclick="ldReset()">← New lead</button>
+          </div>
+        </div>
+      </div>
+      <div class="tp-card" style="border-color:rgba(184,154,90,0.08)">
+        <span class="tp-label">About this tool</span>
+        <p class="tp-q" style="font-size:15px">AI Lead Qualifier</p>
+        <p style="font-size:12px;font-weight:300;color:rgba(245,242,236,0.48);line-height:1.9;margin-bottom:20px">Qualifies every website lead in seconds. After a prospect answers 5 quick questions, our AI scores them A/B/C, writes a personalized reply you can send instantly, and gives your team internal notes.</p>
+        <div style="border-top:1px solid rgba(184,154,90,0.1);padding-top:20px">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.28);margin-bottom:10px">What you get</div>
+          <div style="font-size:12px;color:rgba(245,242,236,0.5);line-height:2">✦ &nbsp;Lead score (A = hot, B = warm, C = low priority)<br>✦ &nbsp;Ready-to-send personalized reply<br>✦ &nbsp;Internal handling notes for your team<br>✦ &nbsp;Works 24/7 automatically</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL 2: SOCIAL CONTENT -->
+  <div class="tool-panel" id="tp1">
+    <div class="tp-grid">
+      <div class="tp-card">
+        <span class="tp-label">Service / Project</span>
+        <div class="t-chips" id="soc-chips">
+          <button class="t-chip tc-on" onclick="socChip(this,'Luxury Residential Construction')">Luxury Residential</button>
+          <button class="t-chip" onclick="socChip(this,'Kitchen Remodeling')">Kitchen Remodel</button>
+          <button class="t-chip" onclick="socChip(this,'Bathroom Remodeling')">Bathroom Remodel</button>
+          <button class="t-chip" onclick="socChip(this,'Roofing')">Roofing</button>
+          <button class="t-chip" onclick="socChip(this,'Concrete & Masonry')">Concrete</button>
+          <button class="t-chip" onclick="socChip(this,'Renovation & Restoration')">Renovation</button>
+          <button class="t-chip" onclick="socChip(this,'Outdoor & Pool Spaces')">Outdoor / Pool</button>
+        </div>
+        <span class="tp-label">Tone</span>
+        <div class="t-opts" style="grid-template-columns:1fr 1fr;margin-bottom:16px" id="soc-tones">
+          <button class="t-opt t-sel" onclick="socTone(this,'Professional & trustworthy')">Professional</button>
+          <button class="t-opt" onclick="socTone(this,'Bold & confident')">Bold & Confident</button>
+          <button class="t-opt" onclick="socTone(this,'Warm & community-focused')">Warm & Community</button>
+          <button class="t-opt" onclick="socTone(this,'Behind-the-scenes & authentic')">Behind the Scenes</button>
+        </div>
+        <span class="tp-label">Extra details (optional)</span>
+        <textarea class="t-ta" id="soc-notes" placeholder="E.g. 'Miami Beach kitchen, marble countertops, before/after reveal'..."></textarea>
+        <button class="t-btn" id="soc-btn" onclick="socGen()">Generate Posts</button>
+        <div class="t-result" id="soc-result">
+          <div class="post-out" id="soc-posts"></div>
+        </div>
+      </div>
+      <div class="tp-card" style="border-color:rgba(184,154,90,0.08)">
+        <span class="tp-label">About this tool</span>
+        <p class="tp-q" style="font-size:15px">Social Content Generator</p>
+        <p style="font-size:12px;font-weight:300;color:rgba(245,242,236,0.48);line-height:1.9;margin-bottom:20px">Generates ready-to-post Instagram and TikTok captions with hashtags for @enovationllc. Pick your service and tone, then copy and post.</p>
+        <div style="border-top:1px solid rgba(184,154,90,0.1);padding-top:20px">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.28);margin-bottom:10px">What you get</div>
+          <div style="font-size:12px;color:rgba(245,242,236,0.5);line-height:2">✦ &nbsp;4 platform-optimized posts per generation<br>✦ &nbsp;Instagram + TikTok captions<br>✦ &nbsp;8–12 targeted hashtags per post<br>✦ &nbsp;Florida-localized content</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL 3: SEO GENERATOR -->
+  <div class="tool-panel" id="tp2">
+    <div class="tp-grid">
+      <div class="tp-card">
+        <span class="tp-label">Florida County</span>
+        <select class="t-sel-drop" id="seo-county">
+          <option>Miami-Dade County</option><option>Broward County</option><option>Palm Beach County</option>
+          <option>Orange County (Orlando)</option><option>Hillsborough County (Tampa)</option>
+          <option>Duval County (Jacksonville)</option><option>Collier County (Naples)</option>
+          <option>Lee County (Fort Myers)</option><option>Sarasota County</option>
+          <option>All of South Florida</option><option>All 67 Florida Counties</option>
+        </select>
+        <span class="tp-label">Service</span>
+        <select class="t-sel-drop" id="seo-service">
+          <option>Luxury Residential Construction</option><option>Kitchen Remodeling</option>
+          <option>Bathroom Remodeling</option><option>General Contracting</option>
+          <option>Renovation & Restoration</option><option>Roofing</option>
+          <option>Concrete & Masonry</option><option>Outdoor & Pool Construction</option>
+        </select>
+        <span class="tp-label">Content Type</span>
+        <div class="t-opts" id="seo-types" style="grid-template-columns:1fr 1fr;margin-bottom:16px">
+          <button class="t-opt t-sel" onclick="seoType(this,'Blog post')">Blog Post</button>
+          <button class="t-opt" onclick="seoType(this,'Service page')">Service Page</button>
+          <button class="t-opt" onclick="seoType(this,'FAQ section')">FAQ Section</button>
+          <button class="t-opt" onclick="seoType(this,'Meta title & description')">Meta Tags</button>
+          <button class="t-opt" onclick="seoType(this,'Google My Business post')">GMB Post</button>
+          <button class="t-opt" onclick="seoType(this,'Keyword research')">Keywords</button>
+        </div>
+        <button class="t-btn" id="seo-btn" onclick="seoGen()">Generate SEO Content</button>
+        <div class="t-result seo-out" id="seo-result"></div>
+      </div>
+      <div class="tp-card" style="border-color:rgba(184,154,90,0.08)">
+        <span class="tp-label">About this tool</span>
+        <p class="tp-q" style="font-size:15px">SEO Content Generator</p>
+        <p style="font-size:12px;font-weight:300;color:rgba(245,242,236,0.48);line-height:1.9;margin-bottom:20px">Generates Google-optimized content targeting any Florida county and service. Builds your search presence over time — no writing required.</p>
+        <div style="border-top:1px solid rgba(184,154,90,0.1);padding-top:20px">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.28);margin-bottom:10px">What you get</div>
+          <div style="font-size:12px;color:rgba(245,242,236,0.5);line-height:2">✦ &nbsp;Blog posts, service pages, FAQs<br>✦ &nbsp;Meta titles & descriptions<br>✦ &nbsp;Google My Business posts<br>✦ &nbsp;Local keyword research (all 67 counties)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL 4: OUTREACH -->
+  <div class="tool-panel" id="tp3">
+    <div class="tp-grid">
+      <div class="tp-card">
+        <span class="tp-label">Message type</span>
+        <div class="t-opts" id="out-types" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:16px">
+          <button class="t-opt t-sel" onclick="outType(this,'email')">Email</button>
+          <button class="t-opt" onclick="outType(this,'sms')">SMS</button>
+          <button class="t-opt" onclick="outType(this,'both')">Both</button>
+        </div>
+        <span class="tp-label">Scenario</span>
+        <select class="t-sel-drop" id="out-scenario">
+          <option value="new lead follow-up">New lead follow-up</option>
+          <option value="after sending a quote">After sending a quote</option>
+          <option value="no response re-engagement after 2 weeks">No response – re-engagement</option>
+          <option value="project complete – ask for review">Project complete – ask for review</option>
+          <option value="seasonal promotion">Seasonal promotion</option>
+          <option value="referral request from past client">Referral request</option>
+          <option value="cold outreach to homeowner">Cold outreach</option>
+        </select>
+        <span class="tp-label">Prospect name</span>
+        <input class="t-inp" id="out-name" placeholder="e.g. Maria">
+        <span class="tp-label">Service interest</span>
+        <select class="t-sel-drop" id="out-service">
+          <option>Luxury Residential Construction</option><option>Kitchen Remodeling</option>
+          <option>Bathroom Remodeling</option><option>General Contracting</option>
+          <option>Renovation & Restoration</option><option>Roofing</option><option>Concrete & Masonry</option>
+        </select>
+        <span class="tp-label">Sequence length</span>
+        <div class="t-opts" id="out-seq" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:16px">
+          <button class="t-opt t-sel" onclick="outSeq(this,1)">1 Message</button>
+          <button class="t-opt" onclick="outSeq(this,3)">3 Messages</button>
+          <button class="t-opt" onclick="outSeq(this,5)">5 Messages</button>
+        </div>
+        <button class="t-btn" id="out-btn" onclick="outGen()">Generate Messages</button>
+        <div class="t-result" id="out-result">
+          <div class="msg-seq" id="out-msgs"></div>
+        </div>
+      </div>
+      <div class="tp-card" style="border-color:rgba(184,154,90,0.08)">
+        <span class="tp-label">About this tool</span>
+        <p class="tp-q" style="font-size:15px">Email & SMS Outreach</p>
+        <p style="font-size:12px;font-weight:300;color:rgba(245,242,236,0.48);line-height:1.9;margin-bottom:20px">Generates personalized follow-up sequences for every scenario — new leads, quotes, re-engagement, reviews, and more. Copy and send.</p>
+        <div style="border-top:1px solid rgba(184,154,90,0.1);padding-top:20px">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.28);margin-bottom:10px">What you get</div>
+          <div style="font-size:12px;color:rgba(245,242,236,0.5);line-height:2">✦ &nbsp;Up to 5-message sequences<br>✦ &nbsp;Email + SMS formats<br>✦ &nbsp;7 outreach scenarios covered<br>✦ &nbsp;Fully personalized, copy-ready</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOL 5: AI RENOVATION PREVIEW -->
+  <div class="tool-panel" id="tp4">
+    <div class="tp-grid">
+      <div class="tp-card">
+        <span class="tp-label">Step 1 — Upload a photo</span>
+        <label class="ai-upload" id="ai-upload-box">
+          <input type="file" id="ai-file" accept="image/*" onchange="aiFileChosen(this)">
+          <span class="ai-upload-txt" id="ai-upload-txt">Tap to upload a photo of the space (kitchen, bathroom, yard, exterior...)</span>
+        </label>
+
+        <span class="tp-label">Step 2 — Describe what you want</span>
+        <textarea class="t-ta" id="ai-desc" placeholder="e.g. Make it modern and bright, white shaker cabinets, quartz island, matte black fixtures"></textarea>
+        <button class="t-btn" id="ai-prompt-btn" onclick="aiCraftPrompt()" style="background:transparent;color:var(--gold);border:1px solid rgba(184,154,90,0.3)">✦ Craft AI Prompt</button>
+
+        <div class="ai-prompt-box" id="ai-prompt-box">
+          <span class="tp-label" style="margin-bottom:8px">AI-refined prompt <span style="color:rgba(245,242,236,0.35);text-transform:none;letter-spacing:0;font-size:10px">(edit if you like)</span></span>
+          <textarea class="t-ta" id="ai-final-prompt" style="min-height:70px"></textarea>
+        </div>
+
+        <button class="t-btn" id="ai-gen-btn" onclick="aiGenerateImage()" disabled>Generate "After" Photo</button>
+
+        <div class="t-result" id="ai-result">
+          <div class="ai-ba-grid">
+            <div class="ai-ba-item"><div class="ai-ba-lbl">Before</div><img decoding="async" loading="lazy" id="ai-before-img" src=""></div>
+            <div class="ai-ba-item"><div class="ai-ba-lbl">After</div><img decoding="async" loading="lazy" id="ai-after-img" src=""></div>
+          </div>
+          <button class="t-copy" id="ai-download" style="margin-top:14px">Download "After" Photo</button>
+          <button class="t-copy" style="margin-top:14px;margin-left:8px" onclick="aiReset()">← Try another</button>
+        </div>
+      </div>
+      <div class="tp-card" style="border-color:rgba(184,154,90,0.08)">
+        <span class="tp-label">About this tool</span>
+        <p class="tp-q" style="font-size:15px">AI Renovation Preview</p>
+        <p style="font-size:12px;font-weight:300;color:rgba(245,242,236,0.48);line-height:1.9;margin-bottom:20px">Upload a photo of any space and describe the transformation in plain language. Our AI writes a polished design prompt for you, then generates a realistic "after" preview — a powerful visual sales tool for closing renovation and remodeling projects.</p>
+        <div style="border-top:1px solid rgba(184,154,90,0.1);padding-top:20px">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,242,236,0.28);margin-bottom:10px">What you get</div>
+          <div style="font-size:12px;color:rgba(245,242,236,0.5);line-height:2">✦ &nbsp;No design experience needed — just describe it<br>✦ &nbsp;AI-crafted, editable prompt<br>✦ &nbsp;Instant before/after preview<br>✦ &nbsp;Downloadable image to share with clients</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="contact">
+  <div class="con-wrap">
+    <div class="reveal visible">
+      <span class="eyebrow">Get In Touch</span>
+      <h2 class="sec-title">Let's Build<br>Something <em>Great</em></h2>
+      <p class="con-body">Ready to bring your project to life? Enovation LLC serves clients across the entire state of Florida. Reach out — we'd love to hear your vision.</p>
+      <div class="cd"><span class="cd-l">Phone</span><span class="cd-v"><a href="tel:3054407464">(305) 440-7464</a></span></div>
+      <div class="cd"><span class="cd-l">Email</span><span class="cd-v"><a href="mailto:info@enovationllc.com">info@enovationllc.com</a></span></div>
+      <div class="cd"><span class="cd-l">Service Area</span><span class="cd-v">Statewide — Florida</span></div>
+    </div>
+    <div class="reveal visible" style="transition-delay:.2s">
+      <div class="f-row">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="John"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+      </div>
+      <div class="fg"><label>Company</label><input type="text" placeholder="Your Company"></div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="john@company.com"></div>
+      <div class="fg"><label>Project Details</label><textarea placeholder="Tell us about your project..."></textarea></div>
+      <button class="btn-s" type="button">Send Message &nbsp;→</button>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="fl">Enovation LLC</div>
+  <div class="ft">Built in vision, driven by precision.</div>
+  <div class="footer-soc">
+    <a href="https://www.instagram.com/enovationllc" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
+    <a href="https://www.tiktok.com/@enovationllc" target="_blank"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"></path></svg></a>
+  </div>
+  <div class="fc">© 2026 Enovation LLC. All rights reserved. | Serving all of Florida</div>
+</footer>
+<div id="lb" onclick="closeLb()"><button id="lb-x" onclick="closeLb()">✕</button><img decoding="async" loading="lazy" id="lb-img" src="https://enovationllc.com/" alt=""></div>
+<script>
+// ── E Logo Canvas Splash ──────────────────────────────
+(function(){
+var canvas=document.getElementById('splash-canvas');
+var ctx=canvas.getContext('2d');
+var vw=Math.min(window.innerWidth,600);
+var vh=Math.min(window.innerHeight,700);
+var sz=Math.min(vw*0.85,vh*0.55,360);
+canvas.width=sz; canvas.height=sz*1.22;
+var CW=canvas.width, CH=canvas.height;
+
+var GOLD='#B89A5A',GOLD_L='#E0C878',GOLD_D='#786030',BGC='#080808';
+
+var EX=CW*0.28, EY=CH*0.07;
+var EW=CW*0.58, EH=CH*0.78;
+var EMX=EX+EW*0.82, EMY=EY+EH*0.5;
+var I1=CW*0.038, I2=CW*0.072, I3=CW*0.105;
+
+var S=[
+  // Ticks
+  {x1:EX-CW*.06,y1:EY,x2:EX-CW*.02,y2:EY,w:1,c:GOLD_D},
+  {x1:EX,y1:EY-CH*.05,x2:EX,y2:EY-CH*.02,w:1,c:GOLD_D},
+  {x1:EX+EW+CW*.02,y1:EY,x2:EX+EW+CW*.06,y2:EY,w:1,c:GOLD_D},
+  {x1:EX+EW,y1:EY-CH*.05,x2:EX+EW,y2:EY-CH*.02,w:1,c:GOLD_D},
+  {x1:EX-CW*.06,y1:EY+EH,x2:EX-CW*.02,y2:EY+EH,w:1,c:GOLD_D},
+  {x1:EX,y1:EY+EH+CH*.02,x2:EX,y2:EY+EH+CH*.05,w:1,c:GOLD_D},
+  {x1:EX+EW+CW*.02,y1:EY+EH,x2:EX+EW+CW*.06,y2:EY+EH,w:1,c:GOLD_D},
+  {x1:EX+EW,y1:EY+EH+CH*.02,x2:EX+EW,y2:EY+EH+CH*.05,w:1,c:GOLD_D},
+  {x1:EX-CW*.06,y1:EMY,x2:EX-CW*.02,y2:EMY,w:1,c:GOLD_D},
+  {x1:EMX+CW*.02,y1:EMY,x2:EMX+CW*.06,y2:EMY,w:1,c:GOLD_D},
+  {x1:EX-CW*.04,y1:EY+EH*.12,x2:EX-CW*.04,y2:EY+EH*.88,w:1,c:GOLD_D},
+  {x1:CW/2,y1:EY-CH*.07,x2:CW/2,y2:EY-CH*.02,w:1,c:GOLD_D},
+  {x1:CW/2,y1:EY+EH+CH*.02,x2:CW/2,y2:EY+EH+CH*.07,w:1,c:GOLD_D},
+  // Spine
+  {x1:EX,y1:EY,x2:EX,y2:EY+EH,w:4,c:GOLD},
+  // Top bar
+  {x1:EX,y1:EY,x2:EX+EW,y2:EY,w:4,c:GOLD},
+  // Bottom bar
+  {x1:EX,y1:EY+EH,x2:EX+EW,y2:EY+EH,w:4,c:GOLD},
+  // Middle bar
+  {x1:EX,y1:EMY,x2:EMX,y2:EMY,w:4,c:GOLD},
+  // Right caps
+  {x1:EX+EW,y1:EY,x2:EX+EW,y2:EY+EH*0.15,w:4,c:GOLD},
+  {x1:EX+EW,y1:EY+EH*0.85,x2:EX+EW,y2:EY+EH,w:4,c:GOLD},
+  {x1:EMX,y1:EMY-EH*.08,x2:EMX,y2:EMY+EH*.08,w:4,c:GOLD},
+  // Inner 1
+  {x1:EX+I1,y1:EY+I1,x2:EX+I1,y2:EY+EH-I1,w:2,c:GOLD},
+  {x1:EX+I1,y1:EY+I1,x2:EX+EW-I1,y2:EY+I1,w:2,c:GOLD},
+  {x1:EX+I1,y1:EY+EH-I1,x2:EX+EW-I1,y2:EY+EH-I1,w:2,c:GOLD},
+  {x1:EX+I1,y1:EMY-I1*.5,x2:EMX-I1,y2:EMY-I1*.5,w:2,c:GOLD},
+  {x1:EX+I1,y1:EMY+I1*.5,x2:EMX-I1,y2:EMY+I1*.5,w:2,c:GOLD},
+  // Inner 2
+  {x1:EX+I2,y1:EY+I2,x2:EX+I2,y2:EY+EH-I2,w:1,c:GOLD},
+  {x1:EX+I2,y1:EY+I2,x2:EX+EW-I2,y2:EY+I2,w:1,c:GOLD},
+  {x1:EX+I2,y1:EY+EH-I2,x2:EX+EW-I2,y2:EY+EH-I2,w:1,c:GOLD},
+  {x1:EX+I2,y1:EMY-I1,x2:EMX-I2,y2:EMY-I1,w:1,c:GOLD},
+  {x1:EX+I2,y1:EMY+I1,x2:EMX-I2,y2:EMY+I1,w:1,c:GOLD},
+  // Inner 3
+  {x1:EX+I3,y1:EY+I3,x2:EX+I3,y2:EY+EH-I3,w:1,c:GOLD_D},
+  {x1:EX+I3,y1:EY+I3,x2:EX+EW-I3,y2:EY+I3,w:1,c:GOLD_D},
+  {x1:EX+I3,y1:EY+EH-I3,x2:EX+EW-I3,y2:EY+EH-I3,w:1,c:GOLD_D},
+  {x1:EX+I3,y1:EMY-I2*.6,x2:EMX-I3,y2:EMY-I2*.6,w:1,c:GOLD_D},
+  {x1:EX+I3,y1:EMY+I2*.6,x2:EMX-I3,y2:EMY+I2*.6,w:1,c:GOLD_D},
+];
+
+var NL=S.length;
+var TOTAL=5800;
+var DS=0.04*TOTAL, DE=0.80*TOTAL;
+var LDUR=75, STAG=(DE-DS-LDUR)/(NL-1);
+
+function eo(t,p){p=p||3;t=Math.max(0,Math.min(1,t));return 1-Math.pow(1-t,p);}
+function drawGlow(x,y,col,r){
+  var g=ctx.createRadialGradient(x,y,0,x,y,r);
+  g.addColorStop(0,col+'bb');g.addColorStop(1,col+'00');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
+}
+
+var startTime=null, textShown=false, done=false;
+
+function frame(ts){
+  if(!startTime)startTime=ts;
+  var el=ts-startTime;
+  var t=Math.min(el/TOTAL,1);
+
+  ctx.fillStyle=BGC;ctx.fillRect(0,0,CW,CH);
+
+  // Grid
+  var gp=eo(Math.min(el/350,1))*0.07;
+  if(gp>0.003){
+    ctx.strokeStyle='rgba(184,154,90,'+gp+')';ctx.lineWidth=0.5;
+    for(var gx=0;gx<CW;gx+=40){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,CH);ctx.stroke();}
+    for(var gy=0;gy<CH;gy+=40){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(CW,gy);ctx.stroke();}
+  }
+
+  // Strokes
+  for(var i=0;i<NL;i++){
+    var s=S[i];
+    var ls=DS+i*STAG, le=ls+LDUR+60;
+    var lp=eo(Math.max(0,Math.min(1,(el-ls)/(le-ls))),2);
+    if(lp<=0.001)continue;
+    var ex=s.x1+(s.x2-s.x1)*lp, ey=s.y1+(s.y2-s.y1)*lp;
+    ctx.strokeStyle=s.c;ctx.lineWidth=s.w;ctx.lineCap='round';
+    ctx.beginPath();ctx.moveTo(s.x1,s.y1);ctx.lineTo(ex,ey);ctx.stroke();
+    if(lp<0.97)drawGlow(ex,ey,GOLD_L,Math.max(8,s.w*3));
+  }
+
+  // Text
+  if(t>0.78&&!textShown){textShown=true;document.getElementById('sp-text').classList.add('sp-show');}
+
+  // Gold bar
+  if(t>0.87){
+    var bp=eo((t-0.87)/0.10);
+    var bw=bp*CW;
+    var bg=ctx.createLinearGradient(0,0,bw,0);
+    bg.addColorStop(0,'transparent');bg.addColorStop(0.5,GOLD);bg.addColorStop(1,'transparent');
+    ctx.fillStyle=bg;ctx.fillRect(0,CH-3,bw,2);
+  }
+
+  // Fade out & reveal page
+  if(t>0.94&&!done){
+    done=true;
+    setTimeout(function(){
+      var sp=document.getElementById('splash');
+      sp.classList.add('sp-hide');
+      setTimeout(function(){sp.style.display='none';sp.style.pointerEvents='none';},1300);
+    },300);
+  }
+
+  if(t<1)requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+})();
+var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// ── Tools tab switcher ──
+function showTool(i){
+  document.querySelectorAll('.tool-panel').forEach(function(p){p.classList.remove('tp-active');});
+  document.querySelectorAll('.ttab').forEach(function(t){t.classList.remove('ta');});
+  document.getElementById('tp'+i).classList.add('tp-active');
+  document.querySelectorAll('.ttab')[i].classList.add('ta');
+}
+
+// ── Shared helpers ──
+function tCopy(btn,txt){navigator.clipboard.writeText(txt);btn.textContent='✓ Copied';setTimeout(function(){btn.textContent='Copy';},2000);}
+function apiCall(prompt,cb){
+  fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})})
+  .then(function(r){return r.json();})
+  .then(function(d){var t=d.content.map(function(i){return i.text||'';}).join('');cb(null,t.replace(/```json/g,'').trim());})
+  .catch(function(e){cb(e,null);});
+}
+
+// ── TOOL 1: Lead Qualifier ──
+var ldData={service:'',budget:'',timeline:''};
+var ldStep=1;
+(function(){var d=document.getElementById('ld-dots');for(var i=1;i<=5;i++){var s=document.createElement('span');s.className='t-dot'+(i===1?' td-on':'');s.id='ldd'+i;d.appendChild(s);}})();
+function ldNext(n){
+  document.querySelectorAll('.ld-step').forEach(function(s){s.style.display='none';});
+  document.getElementById('lds-'+n).style.display='block';
+  for(var i=1;i<=5;i++){var d=document.getElementById('ldd'+i);d.className='t-dot'+(i<n?' td-done':i===n?' td-on':'');}
+  ldStep=n;
+}
+function lOpt(el,key,val){
+  el.closest('.t-opts').querySelectorAll('.t-opt').forEach(function(o){o.classList.remove('t-sel');});
+  el.classList.add('t-sel');
+  ldData[key]=val;
+}
+function ldSubmit(){
+  ldData.location=document.getElementById('ld-loc').value||'Florida';
+  ldData.name=document.getElementById('ld-name').value||'Prospect';
+  ldData.email=document.getElementById('ld-email').value;
+  ldData.notes=document.getElementById('ld-notes').value;
+  var btn=document.getElementById('ld-submit');
+  btn.textContent='Analyzing...';btn.disabled=true;
+  var prompt='You are the AI assistant for Enovation LLC, a full-service construction and engineering company serving all 67 Florida counties. Lead form data: Service: '+ldData.service+', Budget: '+ldData.budget+', Timeline: '+ldData.timeline+', Location: '+ldData.location+', Name: '+ldData.name+', Notes: '+(ldData.notes||'None')+'. Score A/B/C, write a personalized reply, and give 2-3 internal team notes. JSON only: {"score":"A","headline":"...","reply":"...","notes":["...","..."]}';
+  apiCall(prompt,function(err,txt){
+    if(err||!txt){btn.textContent='Error – try again';btn.disabled=false;return;}
+    try{
+      var r=JSON.parse(txt);
+      document.getElementById('ld-badge').textContent=r.score;
+      document.getElementById('ld-hl').textContent=r.headline;
+      document.getElementById('ld-reply').textContent=r.reply;
+      document.getElementById('ld-notes-out').textContent=r.notes.map(function(n){return '• '+n;}).join('\n');
+      document.getElementById('ld-steps').style.display='none';
+      document.getElementById('ld-dots').style.display='none';
+      var res=document.getElementById('ld-result');res.style.display='block';res.classList.add('show');
+    }catch(e){btn.textContent='Error – try again';btn.disabled=false;}
+  });
+}
+function ldReset(){
+  ldData={service:'',budget:'',timeline:''};
+  document.getElementById('ld-result').style.display='none';
+  document.getElementById('ld-result').classList.remove('show');
+  document.getElementById('ld-steps').style.display='block';
+  document.getElementById('ld-dots').style.display='flex';
+  document.querySelectorAll('.t-opt').forEach(function(o){o.classList.remove('t-sel');});
+  document.getElementById('ld-loc').value='';
+  document.getElementById('ld-name').value='';
+  document.getElementById('ld-email').value='';
+  document.getElementById('ld-phone').value='';
+  document.getElementById('ld-notes').value='';
+  document.getElementById('ld-submit').textContent='Get Assessment →';
+  document.getElementById('ld-submit').disabled=false;
+  ldNext(1);
+}
+
+// ── TOOL 2: Social ──
+var socService='Luxury Residential Construction';
+var socToneVal='Professional & trustworthy';
+function socChip(el,val){document.querySelectorAll('#soc-chips .t-chip').forEach(function(c){c.classList.remove('tc-on');});el.classList.add('tc-on');socService=val;}
+function socTone(el,val){document.querySelectorAll('#soc-tones .t-opt').forEach(function(o){o.classList.remove('t-sel');});el.classList.add('t-sel');socToneVal=val;}
+function socGen(){
+  var btn=document.getElementById('soc-btn');btn.textContent='Generating...';btn.disabled=true;
+  var notes=document.getElementById('soc-notes').value;
+  var prompt='You are a social media expert for Enovation LLC (luxury construction, all of Florida, Instagram/TikTok: @enovationllc, enovationllc.com). Generate 4 posts. Service: '+socService+'. Tone: '+socToneVal+'. Details: '+(notes||'none')+'. 2 Instagram (3-5 lines + CTA) + 2 TikTok (1-2 lines + energy). Include 8-10 hashtags each. JSON only: {"posts":[{"platform":"Instagram","type":"...","caption":"...","hashtags":"..."}]}';
+  apiCall(prompt,function(err,txt){
+    btn.textContent='Generate Posts';btn.disabled=false;
+    if(err||!txt)return;
+    try{
+      var r=JSON.parse(txt);
+      var c=document.getElementById('soc-posts');c.innerHTML='';
+      r.posts.forEach(function(p){
+        var d=document.createElement('div');d.className='post-card-o';
+        d.innerHTML='<div class="post-card-oh">'+p.platform+'</div><div class="post-card-ob">'+p.caption+'</div><div class="post-card-ot">'+p.hashtags+'</div>';
+        var cp=document.createElement('button');cp.className='t-copy';cp.style.margin='0 14px 10px';cp.textContent='Copy';
+        cp.onclick=(function(txt){return function(){tCopy(cp,txt);};})(p.caption+'\n\n'+p.hashtags);
+        d.appendChild(cp);c.appendChild(d);
+      });
+      var res=document.getElementById('soc-result');res.style.display='block';res.classList.add('show');
+    }catch(e){}
+  });
+}
+
+// ── TOOL 3: SEO ──
+var seoTypeVal='Blog post';
+function seoType(el,val){document.querySelectorAll('#seo-types .t-opt').forEach(function(o){o.classList.remove('t-sel');});el.classList.add('t-sel');seoTypeVal=val;}
+function seoGen(){
+  var btn=document.getElementById('seo-btn');btn.textContent='Generating...';btn.disabled=true;
+  var county=document.getElementById('seo-county').value;
+  var service=document.getElementById('seo-service').value;
+  var prompt='SEO expert for Enovation LLC (enovationllc.com, 305-440-7464, all of Florida). Generate "'+seoTypeVal+'" content for: County: '+county+', Service: '+service+'. Goal: rank on Google, drive traffic to enovationllc.com. JSON only: {"title":"...","sections":[{"heading":"...","content":"..."}],"keywords":["...","..."]}';
+  apiCall(prompt,function(err,txt){
+    btn.textContent='Generate SEO Content';btn.disabled=false;
+    if(err||!txt)return;
+    try{
+      var r=JSON.parse(txt);
+      var c=document.getElementById('seo-result');c.innerHTML='';
+      if(r.title){var tl=document.createElement('div');tl.innerHTML='<span class="t-r-label">Title</span><div class="t-r-body">'+r.title+'</div>';c.appendChild(tl);}
+      r.sections.forEach(function(s){
+        var sd=document.createElement('div');
+        sd.innerHTML='<span class="t-r-label">'+s.heading+'</span><div class="t-r-body">'+s.content+'</div>';
+        var cp=document.createElement('button');cp.className='t-copy';cp.textContent='Copy';
+        cp.onclick=(function(txt){return function(){tCopy(cp,txt);};})(s.content);
+        sd.appendChild(cp);c.appendChild(sd);
+      });
+      if(r.keywords&&r.keywords.length){var kd=document.createElement('div');kd.innerHTML='<span class="t-r-label">Keywords</span><div class="kw-wrap">'+r.keywords.map(function(k){return '<span class="kw-pill">'+k+'</span>';}).join('')+'</div>';c.appendChild(kd);}
+      c.style.display='block';c.classList.add('show');
+    }catch(e){}
+  });
+}
+
+// ── TOOL 4: Outreach ──
+var outTypeVal='email';var outSeqVal=1;
+function outType(el,val){document.querySelectorAll('#out-types .t-opt').forEach(function(o){o.classList.remove('t-sel');});el.classList.add('t-sel');outTypeVal=val;}
+function outSeq(el,val){document.querySelectorAll('#out-seq .t-opt').forEach(function(o){o.classList.remove('t-sel');});el.classList.add('t-sel');outSeqVal=val;}
+function outGen(){
+  var btn=document.getElementById('out-btn');btn.textContent='Generating...';btn.disabled=true;
+  var scenario=document.getElementById('out-scenario').value;
+  var name=document.getElementById('out-name').value||'there';
+  var service=document.getElementById('out-service').value;
+  var prompt='Outreach specialist for Enovation LLC (enovationllc.com, 305-440-7464, George). Generate '+outSeqVal+' '+outTypeVal+' message(s). Scenario: '+scenario+'. Name: '+name+'. Service: '+service+'. Professional but warm. Emails: subject + 3-4 short paragraphs, sign as George | Enovation LLC. SMS: under 160 chars. JSON only: {"messages":[{"type":"Email","label":"...","timing":"...","subject":"...","body":"..."}]}';
+  apiCall(prompt,function(err,txt){
+    btn.textContent='Generate Messages';btn.disabled=false;
+    if(err||!txt)return;
+    try{
+      var r=JSON.parse(txt);
+      var c=document.getElementById('out-msgs');c.innerHTML='';
+      r.messages.forEach(function(m){
+        var md=document.createElement('div');md.className='msg-card';
+        var subj=m.subject?'<div class="msg-subj">Subject: '+m.subject+'</div>':'';
+        md.innerHTML='<div class="msg-card-h"><span class="msg-card-hl">'+m.label+'</span><span class="msg-card-t">'+m.timing+'</span></div>'+subj+'<div class="msg-card-b">'+m.body+'</div>';
+        var cp=document.createElement('button');cp.className='t-copy';cp.style.margin='0 14px 12px';cp.textContent='Copy';
+        cp.onclick=(function(txt){return function(){tCopy(cp,txt);};})(m.body);
+        md.appendChild(cp);c.appendChild(md);
+      });
+      var res=document.getElementById('out-result');res.style.display='block';res.classList.add('show');
+    }catch(e){}
+  });
+}
+
+// ── TOOL 5: AI Renovation Preview ──
+var aiImgData=null; // base64 (no prefix), of the uploaded photo
+var aiImgMime='image/jpeg';
+var aiImgDataUrl=null;
+
+function aiFileChosen(inp){
+  var f=inp.files&&inp.files[0];
+  if(!f)return;
+  aiImgMime=f.type||'image/jpeg';
+  var reader=new FileReader();
+  reader.onload=function(e){
+    aiImgDataUrl=e.target.result;
+    aiImgData=aiImgDataUrl.split(',')[1];
+    var box=document.getElementById('ai-upload-box');
+    box.classList.add('has-img');
+    box.innerHTML='<input type="file" id="ai-file" accept="image/*" onchange="aiFileChosen(this)"><img decoding="async" loading="lazy" src="'+aiImgDataUrl+'">';
+  };
+  reader.readAsDataURL(f);
+}
+
+function aiCraftPrompt(){
+  var desc=document.getElementById('ai-desc').value.trim();
+  if(!desc){alert('Describe the change you want first.');return;}
+  var btn=document.getElementById('ai-prompt-btn');
+  btn.innerHTML='<span class="ai-spinner"></span>Crafting...';btn.disabled=true;
+  var prompt='You are an expert design prompt writer for an AI image editing model. A contractor\'s client wants to preview a renovation. Client\'s plain-language request: "'+desc+'". Write ONE detailed, vivid image-editing prompt (2-4 sentences) describing the desired "after" version of the uploaded photo — specific materials, colors, finishes, and lighting — while preserving the room\'s layout, camera angle, and perspective. JSON only: {"prompt":"..."}';
+  apiCall(prompt,function(err,txt){
+    btn.innerHTML='✦ Craft AI Prompt';btn.disabled=false;
+    if(err||!txt){alert('Something went wrong crafting the prompt — try again.');return;}
+    try{
+      var r=JSON.parse(txt);
+      document.getElementById('ai-final-prompt').value=r.prompt;
+      document.getElementById('ai-prompt-box').classList.add('show');
+      document.getElementById('ai-gen-btn').disabled=!aiImgData;
+    }catch(e){alert('Something went wrong crafting the prompt — try again.');}
+  });
+}
+
+function aiGenerateImage(){
+  if(!aiImgData){alert('Upload a photo first.');return;}
+  var prompt=document.getElementById('ai-final-prompt').value.trim()||document.getElementById('ai-desc').value.trim();
+  if(!prompt){alert('Describe the change you want first.');return;}
+  var btn=document.getElementById('ai-gen-btn');
+  btn.innerHTML='<span class="ai-spinner"></span>Generating... (~20s)';btn.disabled=true;
+  fetch('/.netlify/functions/generate-image',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({image:aiImgData,mimeType:aiImgMime,prompt:prompt})
+  })
+  .then(function(r){return r.json();})
+  .then(function(d){
+    btn.textContent='Generate "After" Photo';btn.disabled=false;
+    if(d.error||!d.image){alert('Generation failed: '+(d.error||'unknown error'));return;}
+    var afterSrc='data:'+(d.mimeType||'image/png')+';base64,'+d.image;
+    document.getElementById('ai-before-img').src=aiImgDataUrl;
+    document.getElementById('ai-after-img').src=afterSrc;
+    document.getElementById('ai-download').onclick=function(){
+      var a=document.createElement('a');a.href=afterSrc;a.download='enovation-ai-preview.png';a.click();
+    };
+    var res=document.getElementById('ai-result');res.style.display='block';res.classList.add('show');
+  })
+  .catch(function(e){
+    btn.textContent='Generate "After" Photo';btn.disabled=false;
+    alert('Generation failed — please try again.');
+  });
+}
+
+function aiReset(){
+  aiImgData=null;aiImgDataUrl=null;
+  var box=document.getElementById('ai-upload-box');
+  box.classList.remove('has-img');
+  box.innerHTML='<input type="file" id="ai-file" accept="image/*" onchange="aiFileChosen(this)"><span class="ai-upload-txt" id="ai-upload-txt">Tap to upload a photo of the space (kitchen, bathroom, yard, exterior...)</span>';
+  document.getElementById('ai-desc').value='';
+  document.getElementById('ai-final-prompt').value='';
+  document.getElementById('ai-prompt-box').classList.remove('show');
+  document.getElementById('ai-gen-btn').disabled=true;
+  var res=document.getElementById('ai-result');res.style.display='none';res.classList.remove('show');
+}
+
+function openLb(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('on');document.body.style.overflow='hidden';}
+function closeLb(){document.getElementById('lb').classList.remove('on');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+</script>
+
+<!-- Music Player -->
+<div id="music-player" style="position:fixed;bottom:24px;left:24px;background:linear-gradient(135deg,rgba(26,20,10,0.97),rgba(20,16,8,0.97));border:1px solid rgba(184,154,90,0.45);border-radius:60px;padding:10px 18px 10px 10px;display:flex;align-items:center;gap:12px;z-index:9998;box-shadow:0 8px 40px rgba(0,0,0,0.6),0 0 0 1px rgba(184,154,90,0.08);transition:opacity 0.3s,transform 0.3s;opacity:0;transform:translateY(20px);animation:mpFadeIn 0.7s 4.8s ease forwards;">
+  <button id="play-btn" onclick="toggleMusic()" title="Play/Pause" style="background:linear-gradient(135deg,#B89A5A,#D4B87A);border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:#1a1a1a;flex-shrink:0;box-shadow:0 2px 12px rgba(184,154,90,0.4);transition:transform 0.2s,box-shadow 0.2s;">▶</button>
+  <div style="display:flex;flex-direction:column;gap:2px;min-width:0;">
+    <span style="color:rgba(184,154,90,0.7);font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;">Now Playing</span>
+    <span id="track-name" style="color:#F5F2EC;font-size:11px;font-family:&#39;Cormorant Garamond&#39;,serif;font-style:italic;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px;">Sounds Good</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:4px;margin-left:4px;">
+    <button onclick="adjustVol(-0.1)" title="Volume down" style="background:none;border:none;color:rgba(184,154,90,0.5);cursor:pointer;font-size:14px;padding:2px 4px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color=&#39;#B89A5A&#39;" onmouseout="this.style.color=&#39;rgba(184,154,90,0.5)&#39;">−</button>
+    <button onclick="adjustVol(0.1)" title="Volume up" style="background:none;border:none;color:rgba(184,154,90,0.5);cursor:pointer;font-size:14px;padding:2px 4px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color=&#39;#B89A5A&#39;" onmouseout="this.style.color=&#39;rgba(184,154,90,0.5)&#39;">+</button>
+    <button onclick="dismissPlayer()" title="Close" style="background:none;border:none;color:rgba(245,242,236,0.25);cursor:pointer;font-size:18px;padding:2px 4px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color=&#39;rgba(245,242,236,0.6)&#39;" onmouseout="this.style.color=&#39;rgba(245,242,236,0.25)&#39;">×</button>
+  </div>
+</div>
+
+<audio id="bg-music" loop="" preload="auto"><source src="assets/audio1.mp3" type="audio/mpeg"></audio>
+
+<style>
+@keyframes mpFadeIn{to{opacity:1;transform:translateY(0)}}
+#play-btn:hover{transform:scale(1.08);box-shadow:0 4px 18px rgba(184,154,90,0.6)!important}
+#music-player{user-select:none}
+</style>
+
+<script>
+var _bgAudio=document.getElementById('bg-music');
+var _playing=false;
+_bgAudio.volume=0.35;
+
+function toggleMusic(){
+  var btn=document.getElementById('play-btn');
+  if(_playing){
+    _bgAudio.pause();
+    btn.textContent='▶';
+    _playing=false;
+  } else {
+    _bgAudio.play().then(function(){
+      btn.textContent='⏸';
+      _playing=true;
+    }).catch(function(){
+      btn.textContent='▶';
+    });
+  }
+}
+
+function adjustVol(delta){
+  _bgAudio.volume=Math.min(1,Math.max(0,_bgAudio.volume+delta));
+}
+
+function dismissPlayer(){
+  var p=document.getElementById('music-player');
+  p.style.opacity='0';
+  p.style.transform='translateY(20px)';
+  setTimeout(function(){p.style.display='none';},300);
+}
+</script>
+
+<!-- ══════════════════════════════════════
+     ENOVATION AI ASSISTANT - CLEAN BUILD
+══════════════════════════════════════ -->
+
+<!-- Floating Bubble -->
+<button id="enov-bubble" onclick="enovOpen()" title="Chat with us">
+  <img decoding="async" loading="lazy" src="assets/img8.jpg" alt="E">
+  <span id="enov-badge"></span>
+</button>
+
+<!-- Chat Modal -->
+<div id="enov-backdrop" onclick="enovClose()"></div>
+<div id="enov-modal">
+  <div id="enov-head">
+    <div id="enov-avatar">🏗</div>
+    <div>
+      <div id="enov-title">Enovation Assistant</div>
+      <div id="enov-sub"><span id="enov-dot"></span> Online — Ready to Help</div>
+    </div>
+    <button id="enov-x" onclick="enovClose()">×</button>
+  </div>
+  <div id="enov-msgs"></div>
+  <div id="enov-chips">
+    <button class="chip" onclick="enovSend(&#39;What services do you offer?&#39;)">Services</button>
+    <button class="chip" onclick="enovSend(&#39;I need a free quote&#39;)">Get a Quote</button>
+    <button class="chip" onclick="enovSend(&#39;What areas do you serve?&#39;)">Service Area</button>
+    <button class="chip" onclick="enovSend(&#39;How do I get started?&#39;)">Get Started</button>
+  </div>
+  <div id="enov-bar">
+    <input id="enov-input" placeholder="Ask about your project..." onkeydown="if(event.key===&#39;Enter&#39;)enovSend()">
+    <button id="enov-btn" onclick="enovSend()">➤</button>
+  </div>
+</div>
+
+<style>
+#enov-bubble{position:fixed;bottom:24px;right:24px;width:64px;height:64px;border-radius:50%;border:2px solid rgba(184,154,90,0.6);background:#0a0a0a;cursor:pointer;z-index:9998;box-shadow:0 4px 20px rgba(184,154,90,0.3);padding:0;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:transform 0.2s,box-shadow 0.2s}
+#enov-bubble:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(184,154,90,0.5)}
+#enov-bubble img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+#enov-badge{position:absolute;top:2px;right:2px;width:12px;height:12px;background:#4caf7d;border-radius:50%;border:2px solid #0a0a0a}
+#enov-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:9999;backdrop-filter:blur(3px)}
+#enov-modal{display:none;position:fixed;bottom:100px;right:24px;width:360px;max-height:560px;background:linear-gradient(160deg,#111008,#0e0c07);border:1px solid rgba(184,154,90,0.3);border-radius:6px;z-index:10000;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.8);overflow:hidden}
+#enov-modal.open{display:flex}
+#enov-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid rgba(184,154,90,0.12);flex-shrink:0}
+#enov-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#B89A5A,#8a6e38);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+#enov-title{font-family:'Cormorant Garamond',serif;font-size:16px;color:#F5F2EC;letter-spacing:1px}
+#enov-sub{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(184,154,90,0.65);display:flex;align-items:center;gap:5px;margin-top:2px}
+#enov-dot{width:6px;height:6px;background:#4caf7d;border-radius:50%;box-shadow:0 0 5px #4caf7d;animation:enovPulse 2s infinite;display:inline-block;flex-shrink:0}
+@keyframes enovPulse{0%,100%{opacity:1}50%{opacity:0.4}}
+#enov-x{margin-left:auto;background:none;border:none;color:rgba(245,242,236,0.3);font-size:22px;cursor:pointer;padding:0 4px;line-height:1;transition:color 0.2s;flex-shrink:0}
+#enov-x:hover{color:rgba(245,242,236,0.7)}
+#enov-msgs{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-height:120px;max-height:300px;scrollbar-width:thin;scrollbar-color:rgba(184,154,90,0.15) transparent}
+.enov-msg{max-width:88%;animation:enovMsgIn 0.25s ease}
+@keyframes enovMsgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.enov-msg.bot{align-self:flex-start}
+.enov-msg.user{align-self:flex-end}
+.enov-bubble-msg{padding:10px 14px;border-radius:4px;font-size:12.5px;line-height:1.65}
+.enov-msg.bot .enov-bubble-msg{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:rgba(245,242,236,0.85)}
+.enov-msg.user .enov-bubble-msg{background:rgba(184,154,90,0.18);border:1px solid rgba(184,154,90,0.28);color:#F5F2EC}
+.enov-bubble-msg strong{color:#D4B87A}
+.enov-typing{display:flex;gap:4px;align-items:center;padding:2px 0}
+.enov-typing span{width:6px;height:6px;background:rgba(184,154,90,0.5);border-radius:50%;animation:enovDot 1.0s ease-in-out infinite}
+.enov-typing span:nth-child(1){animation-delay:0s}
+.enov-typing span:nth-child(2){animation-delay:.25s}
+.enov-typing span:nth-child(3){animation-delay:.5s}
+@keyframes enovDot{0%,80%,100%{transform:translateY(0);opacity:0.5}40%{transform:translateY(-7px);opacity:1}}
+#enov-chips{padding:0 18px 12px;display:flex;flex-wrap:wrap;gap:6px;flex-shrink:0}
+.chip{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(184,154,90,0.7);border:1px solid rgba(184,154,90,0.2);padding:5px 10px;background:none;cursor:pointer;border-radius:2px;transition:all 0.2s;white-space:nowrap}
+.chip:hover{background:rgba(184,154,90,0.1);color:#D4B87A;border-color:rgba(184,154,90,0.45)}
+#enov-bar{display:flex;gap:8px;padding:12px 18px 16px;border-top:1px solid rgba(184,154,90,0.1);flex-shrink:0}
+#enov-input{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(184,154,90,0.2);color:#F5F2EC;padding:10px 13px;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;border-radius:3px;transition:border-color 0.2s}
+#enov-input:focus{border-color:rgba(184,154,90,0.5)}
+#enov-input::placeholder{color:rgba(245,242,236,0.22)}
+#enov-btn{background:linear-gradient(135deg,#B89A5A,#8a6e38);border:none;color:#fff;padding:10px 15px;cursor:pointer;font-size:14px;border-radius:3px;transition:opacity 0.2s;flex-shrink:0}
+#enov-btn:hover{opacity:0.85}
+#enov-btn:disabled{opacity:0.35;cursor:not-allowed}
+</style>
+
+<script>
+var ENOV_HIST = [];
+var ENOV_SYS = "You are the AI assistant for Enovation LLC, a premier full-service construction and engineering company founded in 2013 by George Acosta Jr., serving all 67 counties in Florida.\n\nSERVICES: Luxury Residential Construction, Kitchen & Bathroom Remodeling, General Contracting, Renovation & Restoration, Roofing, Concrete & Masonry, Project Management.\n\nCONTACT: Phone (305) 440-7464, Email info@enovationllc.com, Instagram & TikTok @enovationllc.\n\nWhen asked for a quote, ask for: project type, size/scope, location in Florida, and timeline. Once you have that, ALWAYS respond with the COMPLETE itemized estimate in a single message: every line item with its own price, the subtotal, 7% tax, and the grand total. Never cut a quote short, never say 'continued below', and never summarize instead of listing every line item in full. Format quotes clearly with line breaks.\n\nBe warm, professional, and thorough. Always encourage them to call or email for a formal on-site assessment.";
+
+function enovOpen() {
+  document.getElementById('enov-modal').classList.add('open');
+  document.getElementById('enov-backdrop').style.display = 'block';
+  document.getElementById('enov-bubble').style.display = 'none';
+  if (ENOV_HIST.length === 0) {
+    enovAddMsg('bot', 'Welcome to <strong>Enovation LLC</strong> 👋<br><br>I can answer questions about our services, give you a <strong>free quote estimate</strong>, or help you get started. How can I help?');
+  }
+  enovScroll();
+}
+
+function enovClose() {
+  document.getElementById('enov-modal').classList.remove('open');
+  document.getElementById('enov-backdrop').style.display = 'none';
+  document.getElementById('enov-bubble').style.display = 'flex';
+}
+
+function enovScroll() {
+  var m = document.getElementById('enov-msgs');
+  setTimeout(function(){ m.scrollTop = m.scrollHeight; }, 50);
+}
+
+function enovAddMsg(role, html) {
+  var msgs = document.getElementById('enov-msgs');
+  var div = document.createElement('div');
+  div.className = 'enov-msg ' + role;
+  div.innerHTML = '<div class="enov-bubble-msg">' + html + '</div>';
+  msgs.appendChild(div);
+  enovScroll();
+  return div;
+}
+
+function enovFmt(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+
+async function enovSend(preset) {
+  var input = document.getElementById('enov-input');
+  var text = preset || input.value.trim();
+  if (!text) return;
+  input.value = '';
+  document.getElementById('enov-btn').disabled = true;
+
+  enovAddMsg('user', text);
+  ENOV_HIST.push({role: 'user', content: text});
+
+  var typing = enovAddMsg('bot', '<div class="enov-typing"><span></span><span></span><span></span></div>');
+  var bubble = null;
+  var fullText = '';
+  var gotFirstChunk = false;
+
+  try {
+    var res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ messages: ENOV_HIST })
+    });
+
+    if (!res.ok || !res.body) {
+      throw new Error('Server responded with status ' + res.status);
+    }
+
+    var reader = res.body.getReader();
+    var decoder = new TextDecoder();
+
+    while (true) {
+      var chunk = await reader.read();
+      if (chunk.done) break;
+      var piece = decoder.decode(chunk.value, {stream: true});
+      if (!piece) continue;
+
+      if (!gotFirstChunk) {
+        gotFirstChunk = true;
+        typing.remove();
+        bubble = enovAddMsg('bot', '');
+      }
+
+      fullText += piece;
+      var b = bubble.querySelector('.enov-bubble-msg');
+      if (b) b.innerHTML = enovFmt(fullText);
+      enovScroll();
+    }
+
+    if (!gotFirstChunk) {
+      typing.remove();
+      enovAddMsg('bot', 'Sorry, I had trouble. Please call (305) 440-7464.');
+    } else {
+      ENOV_HIST.push({role: 'assistant', content: fullText});
+    }
+  } catch(e) {
+    typing.remove();
+    var errText = (e && e.message) ? e.message : String(e);
+    enovAddMsg('bot', 'Sorry, something went wrong (' + errText + '). Please call <strong>(305) 440-7464</strong>.');
+  } finally {
+    document.getElementById('enov-btn').disabled = false;
+  }
+}
+</script>
+</body>
+</html>
