@@ -375,12 +375,12 @@ footer{background:#060606;padding:36px 60px;display:flex;align-items:center;just
               <span class="tp-label">Step 1 of 5</span>
               <p class="tp-q">What type of project do you have in mind?</p>
               <div class="t-opts">
-                <button class="t-opt" onclick="lOpt(this,'service','Luxury Residential Construction')">Luxury Residential</button>
-                <button class="t-opt" onclick="lOpt(this,'service','Kitchen or Bathroom Remodeling')">Kitchen / Bathroom</button>
-                <button class="t-opt" onclick="lOpt(this,'service','Renovation & Restoration')">Renovation</button>
-                <button class="t-opt" onclick="lOpt(this,'service','Roofing')">Roofing</button>
-                <button class="t-opt" onclick="lOpt(this,'service','Concrete & Masonry')">Concrete & Masonry</button>
-                <button class="t-opt" onclick="lOpt(this,'service','General Contracting')">General Contracting</button>
+                <button class="t-opt" onclick="lOpt(this,'service','Luxury Residential Construction')">🏡 Luxury Residential</button>
+                <button class="t-opt" onclick="lOpt(this,'service','Kitchen or Bathroom Remodeling')">🍳 Kitchen / Bathroom</button>
+                <button class="t-opt" onclick="lOpt(this,'service','Renovation & Restoration')">🔨 Renovation</button>
+                <button class="t-opt" onclick="lOpt(this,'service','Roofing')">🏗️ Roofing</button>
+                <button class="t-opt" onclick="lOpt(this,'service','Concrete & Masonry')">🧱 Concrete & Masonry</button>
+                <button class="t-opt" onclick="lOpt(this,'service','General Contracting')">📋 General Contracting</button>
               </div>
               <div style="display:flex;justify-content:flex-end"><button class="t-btn" style="width:auto;padding:12px 24px" onclick="ldNext(2)">Continue →</button></div>
             </div>
@@ -1168,7 +1168,7 @@ function enovOpen() {
   document.getElementById('enov-backdrop').style.display = 'block';
   document.getElementById('enov-bubble').style.display = 'none';
   if (ENOV_HIST.length === 0) {
-    enovAddMsg('bot', 'Welcome to <strong>Enovation LLC</strong><br><br>I can answer questions about our services, give you a <strong>free quote estimate</strong>, or help you get started. How can I help?');
+    enovAddMsg('bot', 'Welcome to <strong>Enovation LLC</strong> 👋<br><br>I can answer questions about our services, give you a <strong>free quote estimate</strong>, or help you get started. How can I help?');
   }
   enovScroll();
 }
