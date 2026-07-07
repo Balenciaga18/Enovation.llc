@@ -1216,7 +1216,7 @@ async function enovSend(preset) {
   var gotFirstChunk = false;
 
   try {
-    var res = await fetch('/.netlify/functions/chat', {
+    var res = await fetch('/api/eva-chat', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ messages: ENOV_HIST })
