@@ -9,3 +9,8 @@
      for = "/*"
      [headers.values]
        X-Frame-Options = "SAMEORIGIN"
+
+   [[redirects]]
+     from = "/"
+     to = "/index-latest-v2.html"
+     status = 200
