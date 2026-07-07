@@ -1229,6 +1229,7 @@ async function enovSend(preset) {
     var reader = res.body.getReader();
     var decoder = new TextDecoder();
 
+    var lastRender = 0;
     while (true) {
       var chunk = await reader.read();
       if (chunk.done) break;
@@ -1242,8 +1243,21 @@ async function enovSend(preset) {
       }
 
       fullText += piece;
-      var b = bubble.querySelector('.enov-bubble-msg');
-      if (b) b.innerHTML = enovFmt(fullText);
+
+      var now = performance.now();
+      if (now - lastRender > 66) {
+        lastRender = now;
+        var b = bubble.querySelector('.enov-bubble-msg');
+        if (b) b.innerHTML = enovFmt(fullText);
+        enovScroll();
+      }
+    }
+
+    // Ensure the final complete text is always rendered, even if the last
+    // chunk arrived before the throttle window elapsed.
+    if (bubble) {
+      var bFinal = bubble.querySelector('.enov-bubble-msg');
+      if (bFinal) bFinal.innerHTML = enovFmt(fullText);
       enovScroll();
     }
 
