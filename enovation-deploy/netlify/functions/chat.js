@@ -13,7 +13,7 @@ SERVICES:
 - Project Management
 
 CONTACT:
-- Phone: (888) 388-3353
+- Phone: +1 (888) 388-3353
 - Email: info@enovationllc.com
 - Website: enovationllc.com
 - Instagram & TikTok: @enovationllc

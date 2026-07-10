@@ -627,7 +627,7 @@ footer{background:#060606;padding:36px 60px;display:flex;align-items:center;just
       <span class="eyebrow">Get In Touch</span>
       <h2 class="sec-title">Let's Build<br>Something <em>Great</em></h2>
       <p class="con-body">Ready to bring your project to life? Enovation LLC serves clients across the entire state of Florida. Reach out — we'd love to hear your vision.</p>
-      <div class="cd"><span class="cd-l">Phone</span><span class="cd-v"><a href="tel:18883883353">(888) 388-3353</a></span></div>
+      <div class="cd"><span class="cd-l">Phone</span><span class="cd-v"><a href="tel:18883883353">+1 (888) 388-3353</a></span></div>
       <div class="cd"><span class="cd-l">Email</span><span class="cd-v"><a href="mailto:info@enovationllc.com">info@enovationllc.com</a></span></div>
       <div class="cd"><span class="cd-l">Service Area</span><span class="cd-v">Statewide — Florida</span></div>
     </div>
@@ -1161,7 +1161,7 @@ function dismissPlayer(){
 
 <script>
 var ENOV_HIST = [];
-var ENOV_SYS = "You are the AI assistant for Enovation LLC, a premier full-service construction and engineering company founded in 2013 by George Acosta Jr., serving all 67 counties in Florida.\n\nSERVICES: Luxury Residential Construction, Kitchen & Bathroom Remodeling, General Contracting, Renovation & Restoration, Roofing, Concrete & Masonry, Project Management.\n\nCONTACT: Phone (888) 388-3353, Email info@enovationllc.com, Instagram & TikTok @enovationllc.\n\nWhen asked for a quote, ask for: project type, size/scope, location in Florida, and timeline. Once you have that, ALWAYS respond with the COMPLETE itemized estimate in a single message: every line item with its own price, the subtotal, 7% tax, and the grand total. Never cut a quote short, never say 'continued below', and never summarize instead of listing every line item in full. Format quotes clearly with line breaks.\n\nBe warm, professional, and thorough. Always encourage them to call or email for a formal on-site assessment.";
+var ENOV_SYS = "You are the AI assistant for Enovation LLC, a premier full-service construction and engineering company founded in 2013 by George Acosta Jr., serving all 67 counties in Florida.\n\nSERVICES: Luxury Residential Construction, Kitchen & Bathroom Remodeling, General Contracting, Renovation & Restoration, Roofing, Concrete & Masonry, Project Management.\n\nCONTACT: Phone +1 (888) 388-3353, Email info@enovationllc.com, Instagram & TikTok @enovationllc.\n\nWhen asked for a quote, ask for: project type, size/scope, location in Florida, and timeline. Once you have that, ALWAYS respond with the COMPLETE itemized estimate in a single message: every line item with its own price, the subtotal, 7% tax, and the grand total. Never cut a quote short, never say 'continued below', and never summarize instead of listing every line item in full. Format quotes clearly with line breaks.\n\nBe warm, professional, and thorough. Always encourage them to call or email for a formal on-site assessment.";
 
 function enovOpen() {
   document.getElementById('enov-modal').classList.add('open');
@@ -1263,14 +1263,14 @@ async function enovSend(preset) {
 
     if (!gotFirstChunk) {
       typing.remove();
-      enovAddMsg('bot', 'Sorry, I had trouble. Please call (888) 388-3353.');
+      enovAddMsg('bot', 'Sorry, I had trouble. Please call +1 (888) 388-3353.');
     } else {
       ENOV_HIST.push({role: 'assistant', content: fullText});
     }
   } catch(e) {
     typing.remove();
     var errText = (e && e.message) ? e.message : String(e);
-    enovAddMsg('bot', 'Sorry, something went wrong (' + errText + '). Please call <strong>(888) 388-3353</strong>.');
+    enovAddMsg('bot', 'Sorry, something went wrong (' + errText + '). Please call <strong>+1 (888) 388-3353</strong>.');
   } finally {
     document.getElementById('enov-btn').disabled = false;
   }
