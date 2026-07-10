@@ -627,7 +627,7 @@ footer{background:#060606;padding:36px 60px;display:flex;align-items:center;just
       <span class="eyebrow">Get In Touch</span>
       <h2 class="sec-title">Let's Build<br>Something <em>Great</em></h2>
       <p class="con-body">Ready to bring your project to life? Enovation LLC serves clients across the entire state of Florida. Reach out — we'd love to hear your vision.</p>
-      <div class="cd"><span class="cd-l">Phone</span><span class="cd-v"><a href="tel:7867865452">(786) 786-5452</a></span></div>
+      <div class="cd"><span class="cd-l">Phone</span><span class="cd-v"><a href="tel:18883883353">(888) 388-3353</a></span></div>
       <div class="cd"><span class="cd-l">Email</span><span class="cd-v"><a href="mailto:info@enovationllc.com">info@enovationllc.com</a></span></div>
       <div class="cd"><span class="cd-l">Service Area</span><span class="cd-v">Statewide — Florida</span></div>
     </div>
@@ -893,7 +893,7 @@ function seoGen(){
   var btn=document.getElementById('seo-btn');btn.textContent='Generating...';btn.disabled=true;
   var county=document.getElementById('seo-county').value;
   var service=document.getElementById('seo-service').value;
-  var prompt='SEO expert for Enovation LLC (enovationllc.com, 786-786-5452, all of Florida). Generate "'+seoTypeVal+'" content for: County: '+county+', Service: '+service+'. Goal: rank on Google, drive traffic to enovationllc.com. JSON only: {"title":"...","sections":[{"heading":"...","content":"..."}],"keywords":["...","..."]}';
+  var prompt='SEO expert for Enovation LLC (enovationllc.com, 888-388-3353, all of Florida). Generate "'+seoTypeVal+'" content for: County: '+county+', Service: '+service+'. Goal: rank on Google, drive traffic to enovationllc.com. JSON only: {"title":"...","sections":[{"heading":"...","content":"..."}],"keywords":["...","..."]}';
   apiCall(prompt,function(err,txt){
     btn.textContent='Generate SEO Content';btn.disabled=false;
     if(err||!txt)return;
@@ -923,7 +923,7 @@ function outGen(){
   var scenario=document.getElementById('out-scenario').value;
   var name=document.getElementById('out-name').value||'there';
   var service=document.getElementById('out-service').value;
-  var prompt='Outreach specialist for Enovation LLC (enovationllc.com, 786-786-5452, George). Generate '+outSeqVal+' '+outTypeVal+' message(s). Scenario: '+scenario+'. Name: '+name+'. Service: '+service+'. Professional but warm. Emails: subject + 3-4 short paragraphs, sign as George | Enovation LLC. SMS: under 160 chars. JSON only: {"messages":[{"type":"Email","label":"...","timing":"...","subject":"...","body":"..."}]}';
+  var prompt='Outreach specialist for Enovation LLC (enovationllc.com, 888-388-3353, George). Generate '+outSeqVal+' '+outTypeVal+' message(s). Scenario: '+scenario+'. Name: '+name+'. Service: '+service+'. Professional but warm. Emails: subject + 3-4 short paragraphs, sign as George | Enovation LLC. SMS: under 160 chars. JSON only: {"messages":[{"type":"Email","label":"...","timing":"...","subject":"...","body":"..."}]}';
   apiCall(prompt,function(err,txt){
     btn.textContent='Generate Messages';btn.disabled=false;
     if(err||!txt)return;
@@ -1161,7 +1161,7 @@ function dismissPlayer(){
 
 <script>
 var ENOV_HIST = [];
-var ENOV_SYS = "You are the AI assistant for Enovation LLC, a premier full-service construction and engineering company founded in 2013 by George Acosta Jr., serving all 67 counties in Florida.\n\nSERVICES: Luxury Residential Construction, Kitchen & Bathroom Remodeling, General Contracting, Renovation & Restoration, Roofing, Concrete & Masonry, Project Management.\n\nCONTACT: Phone (786) 786-5452, Email info@enovationllc.com, Instagram & TikTok @enovationllc.\n\nWhen asked for a quote, ask for: project type, size/scope, location in Florida, and timeline. Once you have that, ALWAYS respond with the COMPLETE itemized estimate in a single message: every line item with its own price, the subtotal, 7% tax, and the grand total. Never cut a quote short, never say 'continued below', and never summarize instead of listing every line item in full. Format quotes clearly with line breaks.\n\nBe warm, professional, and thorough. Always encourage them to call or email for a formal on-site assessment.";
+var ENOV_SYS = "You are the AI assistant for Enovation LLC, a premier full-service construction and engineering company founded in 2013 by George Acosta Jr., serving all 67 counties in Florida.\n\nSERVICES: Luxury Residential Construction, Kitchen & Bathroom Remodeling, General Contracting, Renovation & Restoration, Roofing, Concrete & Masonry, Project Management.\n\nCONTACT: Phone (888) 388-3353, Email info@enovationllc.com, Instagram & TikTok @enovationllc.\n\nWhen asked for a quote, ask for: project type, size/scope, location in Florida, and timeline. Once you have that, ALWAYS respond with the COMPLETE itemized estimate in a single message: every line item with its own price, the subtotal, 7% tax, and the grand total. Never cut a quote short, never say 'continued below', and never summarize instead of listing every line item in full. Format quotes clearly with line breaks.\n\nBe warm, professional, and thorough. Always encourage them to call or email for a formal on-site assessment.";
 
 function enovOpen() {
   document.getElementById('enov-modal').classList.add('open');
@@ -1249,14 +1249,14 @@ async function enovSend(preset) {
 
     if (!gotFirstChunk) {
       typing.remove();
-      enovAddMsg('bot', 'Sorry, I had trouble. Please call (786) 786-5452.');
+      enovAddMsg('bot', 'Sorry, I had trouble. Please call (888) 388-3353.');
     } else {
       ENOV_HIST.push({role: 'assistant', content: fullText});
     }
   } catch(e) {
     typing.remove();
     var errText = (e && e.message) ? e.message : String(e);
-    enovAddMsg('bot', 'Sorry, something went wrong (' + errText + '). Please call <strong>(786) 786-5452</strong>.');
+    enovAddMsg('bot', 'Sorry, something went wrong (' + errText + '). Please call <strong>(888) 388-3353</strong>.');
   } finally {
     document.getElementById('enov-btn').disabled = false;
   }
