@@ -30,7 +30,7 @@
 html{scroll-behavior:smooth}
 #about,#services,#portfolio,#testimonials,#tools,#contact{content-visibility:auto;contain-intrinsic-size:1px 1200px;}
 body{font-family:'Montserrat',sans-serif;background:var(--charcoal);color:var(--off-white);overflow-x:hidden;line-height:1.7}
-#splash{position:fixed;inset:0;z-index:9999;background:#080808;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 1.2s ease;animation:splashFailSafe 0.01s linear 6s forwards;}
+#splash{position:fixed;inset:0;z-index:9999;background:#080808;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity 1.2s ease;animation:splashFailSafe 0.01s linear 10s forwards;}
 #splash.sp-hide{opacity:0;pointer-events:none;}
 @keyframes splashFailSafe{to{opacity:0;pointer-events:none;visibility:hidden;}}
 #splash-canvas{display:block;}
@@ -659,13 +659,13 @@ footer{background:#060606;padding:36px 60px;display:flex;align-items:center;just
   <div class="tool-panel" id="tp4">
     <div class="tp-grid">
       <div class="tp-card">
-        <span class="tp-label">Step 1 — Upload a photo</span>
+        <span class="tp-label">Step 1 · Upload a photo</span>
         <label class="ai-upload" id="ai-upload-box">
           <input type="file" id="ai-file" accept="image/*" onchange="aiFileChosen(this)">
           <span class="ai-upload-txt" id="ai-upload-txt">Tap to upload a photo of the space (kitchen, bathroom, yard, exterior...)</span>
         </label>
 
-        <span class="tp-label">Step 2 — Describe what you want</span>
+        <span class="tp-label">Step 2 · Describe what you want</span>
         <textarea class="t-ta" id="ai-desc" placeholder="e.g. Make it modern and bright, white shaker cabinets, quartz island, matte black fixtures"></textarea>
         <button class="t-btn" id="ai-prompt-btn" onclick="aiCraftPrompt()" style="background:transparent;color:var(--gold);border:1px solid rgba(184,154,90,0.3)">✦ Craft AI Prompt</button>
 
@@ -818,7 +818,9 @@ function hideSplashNow(){
 }
 // Fail-safe: no matter what happens in the canvas animation (including
 // browser-specific drawing errors), never let the splash stay stuck.
-setTimeout(hideSplashNow,4000);
+// The animation itself takes ~5.8s (TOTAL) to finish naturally, so this
+// timer must be well past that — it's a true last-resort, not a normal exit.
+setTimeout(hideSplashNow,9000);
 
 function frame(ts){
   try{
