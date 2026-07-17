@@ -80,9 +80,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .about-box{position:relative;height:450px;border:1px solid rgba(184,154,90,0.18);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .about-glow{position:absolute;inset:0;background:radial-gradient(ellipse 65% 65% at 50% 50%,rgba(184,154,90,0.055) 0%,transparent 70%)}
 .about-mono{font-family:'Cormorant Garamond',serif;font-size:130px;font-weight:300;color:rgba(184,154,90,0.1);user-select:none;line-height:1}
-.about-logo{width:58%;max-width:230px;height:auto;display:block;opacity:1;clip-path:inset(0 0 0 0);filter:drop-shadow(0 0 22px rgba(184,154,90,0.18))}
-.about-logo.lb-init{opacity:0;clip-path:inset(100% 0 0 0);transition:opacity 1.1s ease,clip-path 1.5s cubic-bezier(.16,1,.3,1)}
-.about-logo.lb-init.lb-play{opacity:1;clip-path:inset(0 0 0 0)}
+.about-logo{width:58%;max-width:230px;height:auto;display:block;opacity:1;transform:translateY(0);filter:drop-shadow(0 0 22px rgba(184,154,90,0.18))}
+.about-logo.lb-init{opacity:0;transform:translateY(24px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.16,1,.3,1)}
+.about-logo.lb-init.lb-play{opacity:1;transform:translateY(0)}
 .c-tl{position:absolute;top:18px;left:18px;width:28px;height:28px;border-top:1px solid rgba(184,154,90,0.38);border-left:1px solid rgba(184,154,90,0.38)}
 .c-br{position:absolute;bottom:18px;right:18px;width:28px;height:28px;border-bottom:1px solid rgba(184,154,90,0.38);border-right:1px solid rgba(184,154,90,0.38)}
 .about-sub{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:0.45;white-space:nowrap}
@@ -221,7 +221,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .msg-card-t{font-size:9px;color:rgba(184,154,90,0.55);letter-spacing:1px}
 .msg-subj{font-size:10px;color:var(--gold);padding:10px 14px 0;letter-spacing:0.5px}
 .msg-card-b{padding:10px 14px 14px;font-size:12px;color:rgba(245,242,236,0.65);line-height:1.75;white-space:pre-wrap}
-.ai-upload{border:1.5px dashed rgba(184,154,90,0.3);background:rgba(255,255,255,0.02);padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:16px;position:relative;overflow:hidden}
+.ai-upload{display:block;border:1.5px dashed rgba(184,154,90,0.3);background:rgba(255,255,255,0.02);padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:16px;position:relative;overflow:hidden}
 .ai-upload:hover{border-color:var(--gold)}
 .ai-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
 .ai-upload-txt{font-size:11px;letter-spacing:1px;color:rgba(245,242,236,0.45)}
@@ -878,16 +878,23 @@ function frameInner(ts){
 }
 requestAnimationFrame(frame);
 })();
-var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');e.target.classList.add('lb-play');}});},{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// ── About logo reveal: uses the SAME shared observer proven to work for
+// every other .reveal element on the page, instead of a separate one-off
+// observer. Defaults to visible; the hidden state is only ever applied by
+// JS, and a hard timer forces it visible regardless if anything goes wrong.
 try{
   var aboutLogoEl=document.getElementById('aboutLogo');
-  if(aboutLogoEl && window.IntersectionObserver){
+  if(aboutLogoEl){
     aboutLogoEl.classList.add('lb-init');
-    var logoObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('lb-play');logoObs.unobserve(e.target);}});},{threshold:0.2});
-    logoObs.observe(aboutLogoEl);
+    if(window.IntersectionObserver)obs.observe(aboutLogoEl);
+    setTimeout(function(){aboutLogoEl.classList.add('lb-play');},5000);
   }
-}catch(e){/* animation is purely cosmetic; logo stays visible if this fails */}
+}catch(e){
+  if(aboutLogoEl)aboutLogoEl.classList.remove('lb-init');
+}
 
 // ── Tools tab switcher ──
 function showTool(i){
