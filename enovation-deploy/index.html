@@ -1222,7 +1222,10 @@ function dismissPlayer(){
     <button class="chip" onclick="enovSend('What areas do you serve?')">Service Area</button>
     <button class="chip" onclick="enovSend('How do I get started?')">Get Started</button>
   </div>
+  <div id="enov-img-preview"></div>
   <div id="enov-bar">
+    <input type="file" id="enov-file" accept="image/*" style="display:none" onchange="enovImageSelected(event)">
+    <button id="enov-img-btn" onclick="document.getElementById('enov-file').click()" title="Attach a photo">📷</button>
     <input id="enov-input" placeholder="Ask about your project..." onkeydown="if(event.key==='Enter')enovSend()">
     <button id="enov-btn" onclick="enovSend()">➤</button>
   </div>
@@ -1263,6 +1266,14 @@ function dismissPlayer(){
 .chip{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(184,154,90,0.7);border:1px solid rgba(184,154,90,0.2);padding:5px 10px;background:none;cursor:pointer;border-radius:2px;transition:all 0.2s;white-space:nowrap}
 .chip:hover{background:rgba(184,154,90,0.1);color:#D4B87A;border-color:rgba(184,154,90,0.45)}
 #enov-bar{display:flex;gap:8px;padding:12px 18px 16px;border-top:1px solid rgba(184,154,90,0.1);flex-shrink:0}
+#enov-img-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(184,154,90,0.2);color:#F5F2EC;padding:10px 12px;cursor:pointer;font-size:14px;border-radius:3px;transition:opacity 0.2s;flex-shrink:0}
+#enov-img-btn:hover{opacity:0.75}
+#enov-img-preview{display:none;align-items:center;gap:10px;padding:0 18px;margin-top:8px}
+#enov-img-preview.active{display:flex}
+#enov-img-preview img{width:44px;height:44px;object-fit:cover;border-radius:3px;border:1px solid rgba(184,154,90,0.3)}
+#enov-img-preview span{font-size:11px;color:rgba(245,242,236,0.5);flex:1}
+#enov-img-preview button{background:none;border:none;color:rgba(245,242,236,0.5);cursor:pointer;font-size:16px;padding:2px 6px}
+.enov-msg-img{max-width:180px;border-radius:4px;display:block;margin-top:6px}
 #enov-input{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(184,154,90,0.2);color:#F5F2EC;padding:10px 13px;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;border-radius:3px;transition:border-color 0.2s}
 #enov-input:focus{border-color:rgba(184,154,90,0.5)}
 #enov-input::placeholder{color:rgba(245,242,236,0.22)}
@@ -1312,15 +1323,72 @@ function enovFmt(text) {
     .replace(/\n/g, '<br>');
 }
 
+var ENOV_PENDING_IMAGE = null;
+
+function enovImageSelected(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = new Image();
+    img.onload = function() {
+      // Resize client-side before sending — phone photos can be several MB;
+      // keeping the long edge under ~1200px is plenty for Eva to assess room
+      // shape/context and keeps the request fast.
+      var maxDim = 1200;
+      var w = img.width, h = img.height;
+      if (w > maxDim || h > maxDim) {
+        if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+        else { w = Math.round(w * maxDim / h); h = maxDim; }
+      }
+      var canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      var dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+      var base64 = dataUrl.split(',')[1];
+      ENOV_PENDING_IMAGE = { mediaType: 'image/jpeg', data: base64, previewUrl: dataUrl };
+      var pv = document.getElementById('enov-img-preview');
+      pv.innerHTML = '<img src="' + dataUrl + '"><span>Photo attached — add a note or just hit send</span><button onclick="enovRemoveImage()">\u00d7</button>';
+      pv.classList.add('active');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+  event.target.value = '';
+}
+
+function enovRemoveImage() {
+  ENOV_PENDING_IMAGE = null;
+  var pv = document.getElementById('enov-img-preview');
+  pv.classList.remove('active');
+  pv.innerHTML = '';
+}
+
 async function enovSend(preset) {
   var input = document.getElementById('enov-input');
   var text = preset || input.value.trim();
-  if (!text) return;
+  var pendingImg = ENOV_PENDING_IMAGE;
+  if (!text && !pendingImg) return;
   input.value = '';
   document.getElementById('enov-btn').disabled = true;
 
-  enovAddMsg('user', text);
-  ENOV_HIST.push({role: 'user', content: text});
+  var displayHtml = pendingImg
+    ? (text ? enovFmt(text) : '') + '<img class="enov-msg-img" src="' + pendingImg.previewUrl + '">'
+    : text;
+  enovAddMsg('user', displayHtml);
+
+  var apiContent;
+  if (pendingImg) {
+    apiContent = [
+      { type: 'image', source: { type: 'base64', media_type: pendingImg.mediaType, data: pendingImg.data } },
+      { type: 'text', text: text || "Here's a photo of the space I'd like measured." }
+    ];
+  } else {
+    apiContent = text;
+  }
+  ENOV_HIST.push({role: 'user', content: apiContent});
+  enovRemoveImage();
 
   var typing = enovAddMsg('bot', '<div class="enov-typing"><span></span><span></span><span></span></div>');
   var bubble = null;
